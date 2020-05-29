@@ -1,0 +1,6 @@
+{
+  "short_name": "Apollo's Playlist",
+  "name": "Apollo's Playlist",
+  "start_url": ".",
+  "display": "standalone"
+}
