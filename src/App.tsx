@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import HomePage from "./components/HomePage/HomePage";
 import NotFound from "./components/NotFound/NotFound";
 import SignIn from "./components/SignIn/SignIn";
 import SignOut from "./components/SignOut/SignOut";
 
-export default class ApollsPlaylist extends React.Component {
+class ApollsPlaylist extends React.Component {
   public render(): JSX.Element {
     return (
       <div>
@@ -20,3 +21,5 @@ export default class ApollsPlaylist extends React.Component {
     );
   }
 }
+
+export default connect(null, null)(ApollsPlaylist);
