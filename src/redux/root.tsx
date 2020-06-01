@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Store } from "redux";
 
-import ApollosPlaylist from "./App";
-import { IRootState } from "./redux/rootReducer";
+import ApollosPlaylist from "../ApollosPlaylist";
+import { IRootState } from "./rootReducer";
 
 interface IRootProps {
   store: Store<IRootState>;

@@ -1,7 +1,14 @@
 import { combineReducers, Reducer } from "redux";
+import SpotifyWebApi from "spotify-web-api-node";
 
-export interface IRootState {}
+import { clientReducer } from "../common/reducers/spotifyClient";
 
-const rootReducer: Reducer<IRootState> = combineReducers({});
+export interface IRootState {
+  spotifyWebApi: SpotifyWebApi;
+}
+
+const rootReducer: Reducer<IRootState> = combineReducers({
+  spotifyWebApi: clientReducer,
+});
 
 export default rootReducer;

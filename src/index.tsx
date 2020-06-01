@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import ApollosPlaylist from "./App";
+import ApollosPlaylist from "./ApollosPlaylist";
 import configureStore from "./redux/store";
 
 document.addEventListener("DOMContentLoaded", () => {
