@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound/NotFound";
 import SignIn from "./components/SignIn/SignIn";
 import SignOut from "./components/SignOut/SignOut";
 import Dashboard from "./components/Dashboard/Dashboard";
+import ResponsiveDrawer from "./components/ResponsiveDrawer/ResponsiveDrawer";
 
 import { setGloablSpotifyClient } from "./common/actions";
 import { IRootState } from "./redux/rootReducer";
@@ -23,6 +24,9 @@ import {
   IDispatchProps,
   IStateProps,
 } from "./interfaces";
+
+import "typeface-roboto";
+import "./styles.scss";
 
 class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
   public componentDidMount() {
@@ -35,11 +39,19 @@ class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
       this.props.spotifyWebApi.getAccessToken() !== undefined;
 
     if (!isLoggedIn) {
-      return <SignIn />;
+      return (
+        <div className="apollos-playlist-container">
+          <ResponsiveDrawer />
+          <Switch>
+            <SignIn />
+          </Switch>
+        </div>
+      );
     }
 
     return (
-      <div>
+      <div className="apollos-playlist-container">
+        <ResponsiveDrawer />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/dashboard" component={Dashboard} />
