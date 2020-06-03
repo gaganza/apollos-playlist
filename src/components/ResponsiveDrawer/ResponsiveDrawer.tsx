@@ -9,9 +9,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
+import MusicNote from "@material-ui/icons/MusicNote";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import MusicNote from "@material-ui/icons/MusicNote";
 import {
   makeStyles,
   useTheme,
@@ -32,9 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
         flexShrink: 0,
       },
     },
-    typography: {},
     appBar: {
-      display: "flex",
       backgroundColor: "#1D1E28",
       [theme.breakpoints.up("sm")]: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -53,7 +51,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     // necessary for content to be below app bar
     toolbar: {
-      backgroundColor: "#1D1E28",
+      ...theme.mixins.toolbar,
+
+      [theme.breakpoints.up("sm")]: {
+        display: "none",
+      },
     },
     drawerPaper: {
       width: drawerWidth,
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ResponsiveDrawer() {
+export default function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -77,7 +79,6 @@ export default function ResponsiveDrawer() {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
       <h1 style={{ color: "white", padding: "8px 16px" }}>Apollo's Playlist</h1>
       <Divider />
       <List>
@@ -107,7 +108,7 @@ export default function ResponsiveDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap align="center">
+          <Typography variant="h6" noWrap>
             Apollo's Playlist
           </Typography>
         </Toolbar>
@@ -143,6 +144,10 @@ export default function ResponsiveDrawer() {
           </Drawer>
         </Hidden>
       </nav>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        {props.children}
+      </main>
     </div>
   );
 }

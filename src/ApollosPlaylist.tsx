@@ -41,7 +41,6 @@ class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
     if (!isLoggedIn) {
       return (
         <div className="apollos-playlist-container">
-          <ResponsiveDrawer />
           <Switch>
             <SignIn />
           </Switch>
@@ -51,13 +50,14 @@ class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
 
     return (
       <div className="apollos-playlist-container">
-        <ResponsiveDrawer />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/sign-out" component={SignOut} />
-          <Route path="*" component={NotFound} />
-        </Switch>
+        <ResponsiveDrawer>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/sign-out" component={SignOut} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </ResponsiveDrawer>
       </div>
     );
   }
