@@ -10,8 +10,7 @@ import cookie from "react-cookies";
 import HomePage from "./components/HomePage/HomePage";
 import NotFound from "./components/NotFound/NotFound";
 import SignIn from "./components/SignIn/SignIn";
-import SignOut from "./components/SignOut/SignOut";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Playlists from "./components/Playlists/Playlists";
 import ResponsiveDrawer from "./components/ResponsiveDrawer/ResponsiveDrawer";
 
 import { setGloablSpotifyClient, fetchUserData } from "./common/actions";
@@ -32,10 +31,15 @@ import { ICurrentProfile } from "./common/interfaces";
 
 class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
   public componentDidMount() {
+    if (this.props.history.location.pathname === "/") {
+      this.props.history.push("/playlists");
+    }
+
     this.props.setGlobalSpotifyClient(cookie.load("spotify-bearer"));
     if (this.props.spotifyWebApi.getAccessToken() !== undefined) {
       this.props.fetchUserData(this.props.spotifyWebApi);
     }
+
     this.forceUpdate();
   }
 
@@ -47,6 +51,7 @@ class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
       return (
         <div className="apollos-playlist-container">
           <Switch>
+            <Route exact path="/" component={HomePage} />
             <SignIn />
           </Switch>
         </div>
@@ -57,9 +62,7 @@ class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
       <div className="apollos-playlist-container">
         <ResponsiveDrawer>
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/sign-out" component={SignOut} />
+            <Route exact path="/playlists" component={Playlists} />
             <Route path="*" component={NotFound} />
           </Switch>
         </ResponsiveDrawer>

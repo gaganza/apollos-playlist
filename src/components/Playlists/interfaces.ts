@@ -3,13 +3,15 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 import { ICurrentProfile } from "../../common/interfaces";
 
-export interface IHomePageProps {}
+export interface IPlaylistsProps {}
 
-export interface IHomePageState {}
+export interface IPlaylistsState {}
 
 export interface IStateProps {
   spotifyWebApi: SpotifyWebApi;
   user: ICurrentProfile;
 }
 
-export type THomePageProps = IHomePageProps & IStateProps & RouteComponentProps;
+export type TPlaylistsProps = IPlaylistsProps &
+  IStateProps &
+  RouteComponentProps;
