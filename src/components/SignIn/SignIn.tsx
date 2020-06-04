@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 import camelize from "camelize";
 import cookie from "react-cookies";
 
-import { redirectUri, clientId } from "../../authorization";
+import { redirectUri, clientId, scopes } from "../../authorization";
 
 import { setGloablSpotifyClient } from "../../common/actions";
 import { IRootState } from "../../redux/rootReducer";
@@ -52,6 +52,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
         <SpotifyLogin
           redirectUri={redirectUri}
           clientId={clientId}
+          scope={scopes}
           onSuccess={this.onSuccessHandler}
           onFailure={this.onErrorHandler}
         />

@@ -19,6 +19,8 @@ import {
   createStyles,
 } from "@material-ui/core/styles";
 
+import Profile from "./subcomponents/Profile";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -78,17 +80,38 @@ export default function ResponsiveDrawer(props) {
   };
 
   const drawer = (
-    <div>
-      <h1 style={{ color: "white", padding: "8px 16px" }}>Apollo's Playlist</h1>
-      <Divider />
-      <List>
-        {["Playlists", "Create a Playlists"].map((text, index) => (
-          <ListItem button key={text}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "inherit",
+      }}
+    >
+      <div>
+        <h1 style={{ color: "white", padding: "8px 16px" }}>
+          Apollo's Playlist
+        </h1>
+        <Divider />
+        <List>
+          <ListItem button key={"Playlists"}>
             <MusicNote style={{ color: "white" }} />
-            <ListItemText primary={text} style={{ color: "white" }} />
+            <ListItemText primary={"Playlists"} style={{ color: "white" }} />
           </ListItem>
-        ))}
-      </List>
+
+          <ListItem button key={"Create a Playlists"}>
+            <MusicNote style={{ color: "white" }} />
+            <ListItemText
+              primary={"Create a Playlists"}
+              style={{ color: "white" }}
+            />
+          </ListItem>
+        </List>
+        <Divider />
+      </div>
+      <div>
+        <Profile />
+      </div>
     </div>
   );
 
@@ -129,7 +152,7 @@ export default function ResponsiveDrawer(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            {drawer}
+            <React.Fragment>{drawer}</React.Fragment>
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
