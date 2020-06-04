@@ -37,7 +37,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
     });
 
     setGlobalSpotifyClient(cookie.load("spotify-bearer"));
-    history.push("/dashboard");
+    history.push("/playlists");
   };
 
   public onErrorHandler: (data: IAuthorizationErrorResponse) => void = (

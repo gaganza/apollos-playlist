@@ -2,17 +2,17 @@ import * as React from "react";
 import { MapStateToPropsParam, connect } from "react-redux";
 
 import {
-  THomePageProps,
+  TPlaylistsProps,
   IStateProps,
-  IHomePageProps,
-  IHomePageState,
+  IPlaylistsProps,
+  IPlaylistsState,
 } from "./interfaces";
 
 import "./styles.scss";
 import { IRootState } from "../../redux/rootReducer";
 import { withRouter } from "react-router-dom";
 
-class Dashboard extends React.PureComponent<THomePageProps, IHomePageState> {
+class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
   public render(): JSX.Element {
     return <div>{this.props.user && this.props.user.displayName}</div>;
   }
@@ -20,7 +20,7 @@ class Dashboard extends React.PureComponent<THomePageProps, IHomePageState> {
 
 const mapStateToProps: MapStateToPropsParam<
   IStateProps,
-  IHomePageProps,
+  IPlaylistsProps,
   IRootState
 > = (state: IRootState): IStateProps => {
   return {
@@ -29,4 +29,4 @@ const mapStateToProps: MapStateToPropsParam<
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(Dashboard));
+export default withRouter(connect(mapStateToProps, null)(Playlists));

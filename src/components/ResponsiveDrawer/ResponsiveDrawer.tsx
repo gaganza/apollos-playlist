@@ -20,6 +20,7 @@ import {
 } from "@material-ui/core/styles";
 
 import Profile from "./subcomponents/Profile";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -94,18 +95,22 @@ export default function ResponsiveDrawer(props) {
         </h1>
         <Divider />
         <List>
-          <ListItem button key={"Playlists"}>
-            <MusicNote style={{ color: "white" }} />
-            <ListItemText primary={"Playlists"} style={{ color: "white" }} />
-          </ListItem>
+          <Link to={"/playlists"} style={{ textDecoration: "none" }}>
+            <ListItem button key={"Playlists"}>
+              <MusicNote style={{ color: "white" }} />
+              <ListItemText primary={"Playlists"} style={{ color: "white" }} />
+            </ListItem>
+          </Link>
 
-          <ListItem button key={"Create a Playlists"}>
-            <MusicNote style={{ color: "white" }} />
-            <ListItemText
-              primary={"Create a Playlists"}
-              style={{ color: "white" }}
-            />
-          </ListItem>
+          <Link to={"create-a-playlist"} style={{ textDecoration: "none" }}>
+            <ListItem button key={"Create a Playlists"}>
+              <MusicNote style={{ color: "white" }} />
+              <ListItemText
+                primary={"Create a Playlists"}
+                style={{ color: "white" }}
+              />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
       </div>
