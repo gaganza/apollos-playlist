@@ -2,7 +2,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 import { clientId, redirectUri } from "../../authorization";
 
-import { SPOTIFT_API } from "../actions/spotifyClient";
+import { SPOTIFT_API } from "../actions";
 import { IAction } from "../interfaces";
 
 export function clientReducer(

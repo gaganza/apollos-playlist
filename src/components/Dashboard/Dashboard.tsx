@@ -1,9 +1,32 @@
 import * as React from "react";
+import { MapStateToPropsParam, connect } from "react-redux";
 
-export interface IDashboardProps {}
+import {
+  THomePageProps,
+  IStateProps,
+  IHomePageProps,
+  IHomePageState,
+} from "./interfaces";
 
-export default class Dashboard extends React.PureComponent<IDashboardProps> {
+import "./styles.scss";
+import { IRootState } from "../../redux/rootReducer";
+import { withRouter } from "react-router-dom";
+
+class Dashboard extends React.PureComponent<THomePageProps, IHomePageState> {
   public render(): JSX.Element {
-    return <div>Hello World</div>;
+    return <div>{this.props.user && this.props.user.displayName}</div>;
   }
 }
+
+const mapStateToProps: MapStateToPropsParam<
+  IStateProps,
+  IHomePageProps,
+  IRootState
+> = (state: IRootState): IStateProps => {
+  return {
+    spotifyWebApi: state.spotifyWebApi,
+    user: state.user,
+  };
+};
+
+export default withRouter(connect(mapStateToProps, null)(Dashboard));

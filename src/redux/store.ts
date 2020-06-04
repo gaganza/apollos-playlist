@@ -12,6 +12,7 @@ const defaultState: IRootState = {
     clientId,
     redirectUri,
   }),
+  user: null,
 };
 
 function configureStore(
@@ -19,7 +20,7 @@ function configureStore(
 ): Store<IRootState> {
   return createStore(
     rootReducer,
-    preloadedState,
+    preloadedState as any,
     composeWithDevTools(applyMiddleware(thunk))
   );
 }
