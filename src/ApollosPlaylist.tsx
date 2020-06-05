@@ -28,16 +28,17 @@ import "./styles.scss";
 import SpotifyWebApi from "spotify-web-api-node";
 import { ThunkDispatch } from "redux-thunk";
 import { ICurrentProfile } from "./common/interfaces";
+import Playlist from "./components/Playlist/Playlist";
 
 class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
-  public componentDidMount() {
-    if (this.props.history.location.pathname === "/") {
-      this.props.history.push("/playlists");
-    }
-
+  public async componentDidMount() {
     this.props.setGlobalSpotifyClient(cookie.load("spotify-bearer"));
     if (this.props.spotifyWebApi.getAccessToken() !== undefined) {
-      this.props.fetchUserData(this.props.spotifyWebApi);
+      await this.props.fetchUserData(this.props.spotifyWebApi);
+    }
+
+    if (this.props.history.location.pathname === "/") {
+      this.props.history.push("/playlists");
     }
 
     this.forceUpdate();
@@ -62,6 +63,7 @@ class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
       <div className="apollos-playlist-container">
         <ResponsiveDrawer>
           <Switch>
+            <Route path="/playlists/:playlistId" component={Playlist} />
             <Route exact path="/playlists" component={Playlists} />
             <Route path="*" component={NotFound} />
           </Switch>
