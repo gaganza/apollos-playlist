@@ -3,22 +3,15 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 import {
   ICurrentProfile,
-  IPaginationOptions,
-  IPagingObject,
   IPlaylist,
+  IPagingObject,
 } from "../../common/interfaces";
 
-export interface IPlaylistsProps {}
+export interface IPlaylistProps {}
 
-export interface IPlaylistsState {}
+export interface IPlaylistState {}
 
-export interface IDispatchProps {
-  fetchPlaylistData: (
-    api: SpotifyWebApi,
-    userId: string,
-    options?: IPaginationOptions
-  ) => Promise<void>;
-}
+export interface IDispatchProps {}
 
 export interface IStateProps {
   spotifyWebApi: SpotifyWebApi;
@@ -26,7 +19,7 @@ export interface IStateProps {
   playlists: IPagingObject<IPlaylist>;
 }
 
-export type TPlaylistsProps = IPlaylistsProps &
+export type TPlaylistProps = IPlaylistProps &
   IStateProps &
   RouteComponentProps &
   IDispatchProps;

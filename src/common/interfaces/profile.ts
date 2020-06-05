@@ -1,12 +1,4 @@
-/**
- * External Url Object
- * [](https://developer.spotify.com/web-api/object-model/)
- *
- * Note that there might be other types available, it couldn't be found in the docs.
- */
-export interface IExternalUrlObject {
-  spotify: string;
-}
+import { IImageObject, IExternalUrlObject } from ".";
 
 /**
  * Followers Object
@@ -22,25 +14,6 @@ export interface IFollowersObject {
    * The total number of followers.
    */
   total: number;
-}
-
-/**
- * Image Object
- * [](https://developer.spotify.com/web-api/object-model/)
- */
-export interface IImageObject {
-  /**
-   * The image height in pixels. If unknown: `null` or not returned.
-   */
-  height?: number;
-  /**
-   * The source URL of the image.
-   */
-  url: string;
-  /**
-   * The image width in pixels. If unknown: null or not returned.
-   */
-  width?: number;
 }
 
 /**
