@@ -18,6 +18,7 @@
     "axios": "^0.19.2",
     "camelize": "^1.0.0",
     "lodash": "^4.17.15",
+    "nivo": "^0.31.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-cookies": "^0.1.1",
