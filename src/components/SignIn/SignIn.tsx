@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Dispatch } from "redux";
 import {
   connect,
   MapStateToPropsParam,
@@ -12,12 +11,13 @@ import cookie from "react-cookies";
 
 import { redirectUri, clientId, scopes } from "../../authorization";
 
-import { setGloablSpotifyClient } from "../../common/actions";
+import { setGloablSpotifyClient, fetchUserData } from "../../common/actions";
 import { IRootState } from "../../redux/rootReducer";
 import {
   IAuthorizationResponse,
   IAuthorizationErrorResponse,
   IAction,
+  ICurrentProfile,
 } from "../../common/interfaces";
 import {
   TSignInProps,
@@ -25,19 +25,24 @@ import {
   ISignInProps,
   IDispatchProps,
 } from "./interfaces";
+import SpotifyWebApi from "spotify-web-api-node";
+import { ThunkDispatch } from "redux-thunk";
 
 class SignIn extends React.PureComponent<TSignInProps> {
-  public onSuccessHandler: (data: IAuthorizationResponse) => void = (
+  public onSuccessHandler: (data: IAuthorizationResponse) => void = async (
     data: IAuthorizationResponse
   ) => {
-    let { setGlobalSpotifyClient, history } = this.props;
+    let { setGlobalSpotifyClient, history, fetchUserData } = this.props;
 
     cookie.save("spotify-bearer", camelize(data).accessToken, {
       path: "/",
     });
 
     setGlobalSpotifyClient(cookie.load("spotify-bearer"));
-    history.push("/playlists");
+
+    await fetchUserData(this.props.spotifyWebApi).then((_: void) => {
+      history.push("/playlists");
+    });
   };
 
   public onErrorHandler: (data: IAuthorizationErrorResponse) => void = (
@@ -74,10 +79,13 @@ const mapStateToProps: MapStateToPropsParam<
 const mapDispatchToProps: MapDispatchToPropsFunction<
   IDispatchProps,
   ISignInProps
-> = (dispatch: Dispatch<IAction<string>>): IDispatchProps => {
+> = (
+  dispatch: ThunkDispatch<IRootState, null, IAction<string | ICurrentProfile>>
+): IDispatchProps => {
   return {
     setGlobalSpotifyClient: (token: string) =>
       dispatch(setGloablSpotifyClient(token)),
+    fetchUserData: (api: SpotifyWebApi) => dispatch(fetchUserData(api)),
   };
 };
 
