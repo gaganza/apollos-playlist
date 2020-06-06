@@ -6,6 +6,7 @@ import { IAction } from "../../common/interfaces";
 export interface ISignInProps {}
 export interface IDispatchProps {
   setGlobalSpotifyClient: (token: string) => IAction<string>;
+  fetchUserData: (api: SpotifyWebApi) => Promise<void>;
 }
 
 export interface IStateProps {

@@ -33,15 +33,16 @@ import Playlist from "./components/Playlist/Playlist";
 class ApollosPlaylist extends React.PureComponent<TApollosPlaylistProps> {
   public async componentDidMount() {
     this.props.setGlobalSpotifyClient(cookie.load("spotify-bearer"));
+
     if (this.props.spotifyWebApi.getAccessToken() !== undefined) {
-      await this.props.fetchUserData(this.props.spotifyWebApi);
+      await this.props
+        .fetchUserData(this.props.spotifyWebApi)
+        .then((_: void) => {
+          if (this.props.history.location.pathname === "/") {
+            this.props.history.push("/playlists");
+          }
+        });
     }
-
-    if (this.props.history.location.pathname === "/") {
-      this.props.history.push("/playlists");
-    }
-
-    this.forceUpdate();
   }
 
   public render(): JSX.Element {
