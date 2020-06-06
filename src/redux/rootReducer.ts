@@ -1,19 +1,8 @@
 import { combineReducers, Reducer } from "redux";
-import SpotifyWebApi from "spotify-web-api-node";
 
-import { clientReducer, userReducer } from "../common/reducers";
 import { playlistsReducer } from "../components/Playlists/reducer";
-import {
-  ICurrentProfile,
-  IPlaylist,
-  IPagingObject,
-} from "../common/interfaces";
-
-export interface IRootState {
-  spotifyWebApi: SpotifyWebApi;
-  user: ICurrentProfile | null;
-  playlists: IPagingObject<IPlaylist> | null;
-}
+import { clientReducer, userReducer } from "../common/reducers";
+import { IRootState } from "../common/interfaces";
 
 const rootReducer: Reducer<IRootState> = combineReducers({
   spotifyWebApi: clientReducer,

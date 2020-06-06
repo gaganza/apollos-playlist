@@ -1,9 +1,11 @@
 import * as React from "react";
 
-export interface INotFoundProps {}
+import { TNotFoundProps } from "./interfaces";
 
-export default class NotFound extends React.PureComponent<INotFoundProps> {
+class NotFound extends React.PureComponent<TNotFoundProps> {
   public render(): JSX.Element {
     return <div>Not Found</div>;
   }
 }
+
+export default NotFound;

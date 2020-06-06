@@ -5,7 +5,8 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 import { clientId, redirectUri } from "../authorization";
 
-import rootReducer, { IRootState } from "./rootReducer";
+import rootReducer from "./rootReducer";
+import { IRootState } from "../common/interfaces";
 
 const defaultState: IRootState = {
   spotifyWebApi: new SpotifyWebApi({

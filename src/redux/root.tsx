@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Store } from "redux";
 
-import ApollosPlaylist from "../ApollosPlaylist";
-import { IRootState } from "./rootReducer";
+import App from "../core/app";
+import { IRootState } from "../common/interfaces";
 
 interface IRootProps {
   store: Store<IRootState>;
@@ -13,7 +13,7 @@ interface IRootProps {
 const Root = ({ store }: IRootProps): JSX.Element => (
   <Provider store={store}>
     <BrowserRouter>
-      <ApollosPlaylist />
+      <App />
     </BrowserRouter>
   </Provider>
 );

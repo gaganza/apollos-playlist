@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import ApollosPlaylist from "./ApollosPlaylist";
+import App from "./core/app";
 import configureStore from "./redux/store";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <ApollosPlaylist />
+        <App />
       </BrowserRouter>
     </Provider>,
     root

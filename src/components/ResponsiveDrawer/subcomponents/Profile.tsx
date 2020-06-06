@@ -1,10 +1,10 @@
 import * as React from "react";
 import { MapStateToPropsParam, connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-
-import { IRootState } from "../../../redux/rootReducer";
-import { TProfileProps, IStateProps, IProfileProps } from "./interfaces";
 import { Divider, Avatar } from "@material-ui/core";
+
+import { IRootState } from "../../../common/interfaces";
+import { TProfileProps, IStateProps, IProfileProps } from "./interfaces";
 
 class Profile extends React.PureComponent<TProfileProps> {
   public render(): JSX.Element | null {
