@@ -2,7 +2,6 @@ import SpotifyWebApi from "spotify-web-api-node";
 import camelize from "camelize";
 import { Dispatch } from "react";
 import { ThunkAction } from "redux-thunk";
-import { IRootState } from "../../redux/rootReducer";
 
 import {
   IAction,
@@ -10,6 +9,7 @@ import {
   IPaginationOptions,
   IPlaylist,
   IPagingObject,
+  IRootState,
 } from "../../common/interfaces";
 
 export enum PLAYLISTS {

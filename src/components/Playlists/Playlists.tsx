@@ -1,43 +1,22 @@
 import * as React from "react";
-import {
-  MapStateToPropsParam,
-  connect,
-  MapDispatchToPropsFunction,
-} from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
 
-import {
-  TPlaylistsProps,
-  IStateProps,
-  IPlaylistsProps,
-  IPlaylistsState,
-  IDispatchProps,
-} from "./interfaces";
-
-import "./styles.scss";
-import { IRootState } from "../../redux/rootReducer";
-import { withRouter } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-node";
-import {
-  IPaginationOptions,
-  IAction,
-  IPagingObject,
-  IPlaylist,
-} from "../../common/interfaces";
-import { fetchPlaylistData } from "./actions";
+import { Grid } from "@material-ui/core";
 
 import { PlaylistCard } from "./subcomponents";
-import { Grid } from "@material-ui/core";
+import { IPlaylist } from "../../common/interfaces";
+import { TPlaylistsProps, IPlaylistsState } from "./interfaces";
+
+import "./styles.scss";
 
 class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
   public async componentDidMount(): Promise<void> {
+    let { location, spotifyWebApi, fetchPlaylistData, user } = this.props;
     // no URL params
-    if (this.props.location.search === "") {
-      await this.props.fetchPlaylistData(
-        this.props.spotifyWebApi,
-        this.props.user.id,
-        { limit: 12, offset: 12 }
-      );
+    if (location.search === "") {
+      await fetchPlaylistData(spotifyWebApi, user.id, {
+        limit: 12,
+        offset: 12,
+      });
     }
   }
 
@@ -77,33 +56,5 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     return null;
   }
 }
-const mapDispatchToProps: MapDispatchToPropsFunction<
-  IDispatchProps,
-  IPlaylistsProps
-> = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<IPagingObject<IPlaylist>>>
-): IDispatchProps => {
-  return {
-    fetchPlaylistData: (
-      api: SpotifyWebApi,
-      userId: string,
-      options?: IPaginationOptions
-    ) => dispatch(fetchPlaylistData(api, userId, options)),
-  };
-};
 
-const mapStateToProps: MapStateToPropsParam<
-  IStateProps,
-  IPlaylistsProps,
-  IRootState
-> = (state: IRootState): IStateProps => {
-  return {
-    spotifyWebApi: state.spotifyWebApi,
-    user: state.user,
-    playlists: state.playlists,
-  };
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Playlists)
-);
+export default Playlists;

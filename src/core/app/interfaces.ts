@@ -1,9 +1,9 @@
 import { RouteComponentProps } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-node";
 
-import { IAction, ICurrentProfile } from "./common/interfaces";
+import { IAction, ICurrentProfile } from "../../common/interfaces";
 
-export interface IApollosPlaylistProps {}
+export interface IAppProps {}
 
 export interface IDispatchProps {
   setGlobalSpotifyClient: (token: string) => IAction<string>;
@@ -15,7 +15,7 @@ export interface IStateProps {
   user: ICurrentProfile;
 }
 
-export type TApollosPlaylistProps = IApollosPlaylistProps &
+export type TAppProps = IAppProps &
   IStateProps &
   IDispatchProps &
   RouteComponentProps;

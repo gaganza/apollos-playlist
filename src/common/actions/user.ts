@@ -3,7 +3,8 @@ import SpotifyWebApi from "spotify-web-api-node";
 import camelize from "camelize";
 import { Dispatch } from "react";
 import { ThunkAction } from "redux-thunk";
-import { IRootState } from "../../redux/rootReducer";
+
+import { IRootState } from "../interfaces";
 
 export enum USER {
   RECEIVE_USER_DATA = "user/RECEIVE_USER_DATA",

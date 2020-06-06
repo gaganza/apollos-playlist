@@ -1,8 +1,10 @@
 import * as React from "react";
 
-import { IHomePageProps } from "./interfaces";
-export default class HomePage extends React.PureComponent<IHomePageProps> {
+import { THomePageProps } from "./interfaces";
+class HomePage extends React.PureComponent<THomePageProps> {
   public render(): JSX.Element {
     return <div>Homepage</div>;
   }
 }
+
+export default HomePage;
