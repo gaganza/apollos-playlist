@@ -10,7 +10,9 @@ import {
 
 export interface IPlaylistsProps {}
 
-export interface IPlaylistsState {}
+export interface IPlaylistsState {
+  page: number;
+}
 
 export interface IDispatchProps {
   fetchPlaylistData: (
