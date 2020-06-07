@@ -4,19 +4,21 @@ import SpotifyWebApi from "spotify-web-api-node";
 import {
   ICurrentProfile,
   IPlaylist,
-  IPagingObject,
+  IAudioFeatures,
 } from "../../common/interfaces";
 
 export interface IPlaylistProps {}
 
-export interface IPlaylistState {}
+export interface IPlaylistState {
+  playlist: IPlaylist | null;
+  trackAudioFeatures: IAudioFeatures[];
+}
 
 export interface IDispatchProps {}
 
 export interface IStateProps {
   spotifyWebApi: SpotifyWebApi;
   user: ICurrentProfile;
-  playlists: IPagingObject<IPlaylist>;
 }
 
 export type TPlaylistProps = IPlaylistProps &

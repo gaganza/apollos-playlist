@@ -5,7 +5,7 @@ import {
   ICurrentProfile,
   IPaginationOptions,
   IPagingObject,
-  IPlaylist,
+  IPlaylists,
 } from "../../common/interfaces";
 
 export interface IPlaylistsProps {}
@@ -15,7 +15,7 @@ export interface IPlaylistsState {
 }
 
 export interface IDispatchProps {
-  fetchPlaylistData: (
+  fetchPlaylistsData: (
     api: SpotifyWebApi,
     userId: string,
     options?: IPaginationOptions
@@ -25,7 +25,7 @@ export interface IDispatchProps {
 export interface IStateProps {
   spotifyWebApi: SpotifyWebApi;
   user: ICurrentProfile;
-  playlists: IPagingObject<IPlaylist>;
+  playlists: IPagingObject<IPlaylists>;
 }
 
 export type TPlaylistsProps = IPlaylistsProps &

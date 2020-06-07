@@ -13,7 +13,6 @@ const mapStateToProps: MapStateToPropsParam<
   return {
     spotifyWebApi: state.spotifyWebApi,
     user: state.user,
-    playlists: state.playlists,
   };
 };
 
