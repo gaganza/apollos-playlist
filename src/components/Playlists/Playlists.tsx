@@ -1,54 +1,86 @@
 import * as React from "react";
-
 import { Grid } from "@material-ui/core";
+import Pagination from "@material-ui/lab/Pagination";
 
 import { PlaylistCard } from "./subcomponents";
+import { PLAYLIST_RESULTS_PER_PAGE } from "../../common/constants";
 import { IPlaylist } from "../../common/interfaces";
 import { TPlaylistsProps, IPlaylistsState } from "./interfaces";
 
 import "./styles.scss";
 
 class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
+  public constructor(props: TPlaylistsProps) {
+    super(props);
+
+    this.state = {
+      page: 1,
+    };
+  }
+
   public async componentDidMount(): Promise<void> {
-    let { location, spotifyWebApi, fetchPlaylistData, user } = this.props;
+    let {
+      location,
+      spotifyWebApi,
+      fetchPlaylistData,
+      user,
+      playlists,
+    } = this.props;
+
     // no URL params
     if (location.search === "") {
-      await fetchPlaylistData(spotifyWebApi, user.id, {
-        limit: 12,
-        offset: 12,
-      });
+      if (playlists === null) {
+        await fetchPlaylistData(spotifyWebApi, user.id, {
+          limit: PLAYLIST_RESULTS_PER_PAGE,
+          offset: 0,
+        });
+      }
     }
   }
 
-  public renderPlaylistCard(playlist: IPlaylist): JSX.Element {
-    return (
-      <Grid item xs={12} md={3}>
-        <PlaylistCard {...playlist} />
-      </Grid>
-    );
-  }
+  public handlePaginationChange = (
+    _: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    let { fetchPlaylistData, spotifyWebApi, user, playlists } = this.props;
+    if (playlists.items[page] === undefined) {
+      fetchPlaylistData(spotifyWebApi, user.id, {
+        limit: PLAYLIST_RESULTS_PER_PAGE,
+        offset: (page - 1) * PLAYLIST_RESULTS_PER_PAGE,
+      });
+    }
+    this.setState({ page });
+  };
 
   public render(): JSX.Element | null {
-    if (this.props.playlists && this.props.playlists.items) {
+    let { playlists } = this.props;
+    let { page } = this.state;
+
+    if (playlists && playlists.items) {
       return (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Grid container spacing={3}>
-            {this.props.playlists.items.map((playlist: IPlaylist) => {
-              return (
-                <Grid
-                  item
-                  xs={12}
-                  sm={12}
-                  md={6}
-                  lg={4}
-                  xl={3}
-                  key={playlist.id}
-                >
-                  <PlaylistCard {...playlist} />
-                </Grid>
-              );
-            })}
+            {playlists.items[page] &&
+              playlists.items[page].map((playlist: IPlaylist) => {
+                return (
+                  <Grid item xs={12} md={6} lg={4} xl={3} key={playlist.id}>
+                    <PlaylistCard {...playlist} />
+                  </Grid>
+                );
+              })}
           </Grid>
+          <br />
+          <Pagination
+            count={Math.floor(playlists.total / PLAYLIST_RESULTS_PER_PAGE)}
+            page={page}
+            onChange={this.handlePaginationChange}
+          />
         </div>
       );
     }

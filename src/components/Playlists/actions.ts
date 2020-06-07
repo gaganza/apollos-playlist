@@ -3,6 +3,7 @@ import camelize from "camelize";
 import { Dispatch } from "react";
 import { ThunkAction } from "redux-thunk";
 
+import { PLAYLIST_RESULTS_PER_PAGE } from "../../common/constants";
 import {
   IAction,
   Response,
@@ -38,7 +39,16 @@ export const fetchPlaylistData = (
     return api
       .getUserPlaylists(userId, options)
       .then((response: Response<SpotifyApi.ListOfUsersPlaylistsResponse>) => {
-        dispatch(receivePlaylistData(camelize(response.body)));
+        let data: IPagingObject<IPlaylist> = {
+          total: response.body.total,
+          items: {
+            [response.body.offset / PLAYLIST_RESULTS_PER_PAGE + 1]: camelize(
+              response.body.items
+            ),
+          },
+        };
+
+        dispatch(receivePlaylistData(data));
       });
   };
 };
