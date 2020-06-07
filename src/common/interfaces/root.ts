@@ -1,8 +1,8 @@
 import SpotifyWebApi from "spotify-web-api-node";
-import { ICurrentProfile, IPagingObject, IPlaylist } from ".";
+import { ICurrentProfile, IPagingObject, IPlaylists } from ".";
 
 export interface IRootState {
   spotifyWebApi: SpotifyWebApi;
   user: ICurrentProfile | null;
-  playlists: IPagingObject<IPlaylist> | null;
+  playlists: IPagingObject<IPlaylists> | null;
 }

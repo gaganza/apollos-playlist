@@ -10,7 +10,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 
-import { IPlaylist } from "../../../common/interfaces";
+import { IPlaylists } from "../../../common/interfaces";
 
 const cardTheme = createMuiTheme({
   overrides: {
@@ -26,7 +26,7 @@ const cardTheme = createMuiTheme({
   },
 });
 
-class PlaylistCard extends React.PureComponent<IPlaylist> {
+class PlaylistCard extends React.PureComponent<IPlaylists> {
   public render(): JSX.Element {
     let { name, images, id } = this.props;
 

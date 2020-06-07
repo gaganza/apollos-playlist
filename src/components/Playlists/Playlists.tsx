@@ -4,7 +4,7 @@ import Pagination from "@material-ui/lab/Pagination";
 
 import { PlaylistCard } from "./subcomponents";
 import { PLAYLIST_RESULTS_PER_PAGE } from "../../common/constants";
-import { IPlaylist } from "../../common/interfaces";
+import { IPlaylists } from "../../common/interfaces";
 import { TPlaylistsProps, IPlaylistsState } from "./interfaces";
 
 import "./styles.scss";
@@ -22,7 +22,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     let {
       location,
       spotifyWebApi,
-      fetchPlaylistData,
+      fetchPlaylistsData,
       user,
       playlists,
     } = this.props;
@@ -30,7 +30,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     // no URL params
     if (location.search === "") {
       if (playlists === null) {
-        await fetchPlaylistData(spotifyWebApi, user.id, {
+        await fetchPlaylistsData(spotifyWebApi, user.id, {
           limit: PLAYLIST_RESULTS_PER_PAGE,
           offset: 0,
         });
@@ -42,9 +42,9 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     _: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    let { fetchPlaylistData, spotifyWebApi, user, playlists } = this.props;
+    let { fetchPlaylistsData, spotifyWebApi, user, playlists } = this.props;
     if (playlists.items[page] === undefined) {
-      fetchPlaylistData(spotifyWebApi, user.id, {
+      fetchPlaylistsData(spotifyWebApi, user.id, {
         limit: PLAYLIST_RESULTS_PER_PAGE,
         offset: (page - 1) * PLAYLIST_RESULTS_PER_PAGE,
       });
@@ -67,7 +67,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
         >
           <Grid container spacing={3}>
             {playlists.items[page] &&
-              playlists.items[page].map((playlist: IPlaylist) => {
+              playlists.items[page].map((playlist: IPlaylists) => {
                 return (
                   <Grid item xs={12} md={6} lg={4} xl={3} key={playlist.id}>
                     <PlaylistCard {...playlist} />
