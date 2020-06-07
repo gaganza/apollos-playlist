@@ -42,7 +42,7 @@ export const fetchPlaylistData = (
         let data: IPagingObject<IPlaylist> = {
           total: response.body.total,
           items: {
-            [response.body.offset / PLAYLIST_RESULTS_PER_PAGE + 1]: camelize(
+            [options.offset / PLAYLIST_RESULTS_PER_PAGE + 1]: camelize(
               response.body.items
             ),
           },

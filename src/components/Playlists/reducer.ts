@@ -1,3 +1,5 @@
+import merge from "lodash/merge";
+
 import { PLAYLISTS } from "./actions";
 import { IAction, IPagingObject, IPlaylist } from "../../common/interfaces";
 
@@ -7,7 +9,7 @@ export function playlistsReducer(
 ): IPagingObject<IPlaylist> {
   switch (action.type) {
     case PLAYLISTS.RECEIVE_PLAYLIST_DATA:
-      return action.data;
+      return merge({}, state, action.data);
 
     default:
       return state;
