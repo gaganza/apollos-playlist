@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 import Pagination from "@material-ui/lab/Pagination";
 
 import { PlaylistCard } from "./subcomponents";
@@ -8,7 +8,7 @@ import { TPlaylistsProps, IPlaylistsState } from "./interfaces";
 
 import "./styles.scss";
 
-class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
+class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
   public constructor(props: TPlaylistsProps) {
     super(props);
 
@@ -21,7 +21,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     let {
       location,
       spotifyWebApi,
-      fetchPlaylistsData,
+      fetchPlaylists,
       user,
       playlists,
     } = this.props;
@@ -29,7 +29,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     // no URL params
     if (location.search === "") {
       if (playlists === null) {
-        await fetchPlaylistsData(spotifyWebApi, user!.id, {
+        await fetchPlaylists(spotifyWebApi, user!.id, {
           limit: PLAYLIST_RESULTS_PER_PAGE,
           offset: 0,
         });
@@ -41,9 +41,9 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     _: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    let { fetchPlaylistsData, spotifyWebApi, user, playlists } = this.props;
+    let { fetchPlaylists, spotifyWebApi, user, playlists } = this.props;
     if (playlists!.items[page] === undefined) {
-      fetchPlaylistsData(spotifyWebApi, user!.id, {
+      fetchPlaylists(spotifyWebApi, user!.id, {
         limit: PLAYLIST_RESULTS_PER_PAGE,
         offset: (page - 1) * PLAYLIST_RESULTS_PER_PAGE,
       });

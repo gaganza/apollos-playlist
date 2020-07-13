@@ -8,7 +8,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { ThunkDispatch } from "redux-thunk";
 
 import App from "./App";
-import { setGlobalSpotifyClient, fetchUserData } from "../../common/actions";
+import { setGlobalSpotifyClient, fetchUser } from "../../common/actions";
 import { IAction, IRootState } from "../../common/interfaces";
 import { IAppProps, IDispatchProps, IStateProps } from "./interfaces";
 
@@ -32,7 +32,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   return {
     setGlobalSpotifyClient: (token: string) =>
       dispatch(setGlobalSpotifyClient(token)),
-    fetchUserData: (api: SpotifyWebApi) => dispatch(fetchUserData(api)),
+    fetchUser: (api: SpotifyWebApi) => dispatch(fetchUser(api)),
   };
 };
 

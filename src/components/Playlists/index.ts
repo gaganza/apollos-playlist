@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-node";
 
 import Playlists from "./Playlists";
-import { fetchPlaylistsData } from "./actions";
+import { fetchPlaylists } from "./actions";
 import {
   IPaginationOptions,
   IAction,
@@ -24,11 +24,11 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   dispatch: ThunkDispatch<IRootState, null, IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>>
 ): IDispatchProps => {
   return {
-    fetchPlaylistsData: (
+    fetchPlaylists: (
       api: SpotifyWebApi,
       userId: string,
       options: IPaginationOptions
-    ) => dispatch(fetchPlaylistsData(api, userId, options)),
+    ) => dispatch(fetchPlaylists(api, userId, options)),
   };
 };
 

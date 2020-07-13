@@ -15,14 +15,14 @@ class SignIn extends React.PureComponent<TSignInProps> {
   public onSuccessHandler: (data: IAuthorizationResponse) => void = async (
     data: IAuthorizationResponse
   ) => {
-    let { setGlobalSpotifyClient, history, fetchUserData } = this.props;
+    let { setGlobalSpotifyClient, history, fetchUser } = this.props;
 
     cookie.save("spotify-bearer", camelize(data).accessToken, {
       path: "/",
     });
 
     setGlobalSpotifyClient(cookie.load("spotify-bearer"));
-    await fetchUserData(this.props.spotifyWebApi).then((_: void) => {
+    await fetchUser(this.props.spotifyWebApi).then((_: void) => {
       history.push("/playlists");
     });
   };

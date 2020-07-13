@@ -5,16 +5,16 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { IRootState, IAction, Response } from "../interfaces";
 
 export enum USER {
-  RECEIVE_USER_DATA = "user/RECEIVE_USER_DATA",
+  RECEIVE_USER = "user/RECEIVE_USER",
 }
 
-export const receiveUserData = (
+export const receiveUser = (
   data: SpotifyApi.CurrentUsersProfileResponse
 ): IAction<SpotifyApi.CurrentUsersProfileResponse> => {
-  return { type: USER.RECEIVE_USER_DATA, data };
+  return { type: USER.RECEIVE_USER, data };
 };
 
-export const fetchUserData = (
+export const fetchUser = (
   api: SpotifyWebApi
 ): ThunkAction<
   Promise<void>,
@@ -26,7 +26,7 @@ export const fetchUserData = (
     return api
       .getMe()
       .then((response: Response<SpotifyApi.CurrentUsersProfileResponse>) => {
-        dispatch(receiveUserData(response.body));
+        dispatch(receiveUser(response.body));
       });
   };
 };
