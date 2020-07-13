@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 import SignIn from './SignIn';
-import { setGlobalSpotifyClient, fetchUser } from '../../common/actions';
-import { IAction, IRootState } from '../../common/interfaces';
+import { setGlobalSpotifyClient, fetchUser } from 'common/actions';
+import { IAction, IRootState } from 'common/interfaces';
 import { IStateProps, ISignInProps, IDispatchProps } from './interfaces';
 
 const mapStateToProps: MapStateToPropsParam<IStateProps, ISignInProps, IRootState> = (

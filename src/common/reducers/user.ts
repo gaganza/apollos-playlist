@@ -1,5 +1,5 @@
-import { USER } from '../actions';
-import { IAction } from '../interfaces';
+import { USER } from 'common/actions';
+import { IAction } from 'common/interfaces';
 
 export function userReducer(
   state: SpotifyApi.CurrentUsersProfileResponse | null = null,

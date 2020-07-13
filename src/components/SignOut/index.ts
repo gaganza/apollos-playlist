@@ -3,8 +3,8 @@ import { connect, MapStateToPropsParam, MapDispatchToPropsFunction } from 'react
 import { withRouter } from 'react-router-dom';
 
 import SignOut from './SignOut';
-import { setGlobalSpotifyClient } from '../../common/actions';
-import { IAction, IRootState } from '../../common/interfaces';
+import { setGlobalSpotifyClient } from 'common/actions';
+import { IAction, IRootState } from 'common/interfaces';
 import { IStateProps, ISignOutProps, IDispatchProps } from './interfaces';
 
 const mapStateToProps: MapStateToPropsParam<IStateProps, ISignOutProps, IRootState> = (

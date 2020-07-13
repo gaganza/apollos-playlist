@@ -1,7 +1,7 @@
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-node';
 
-import { IPaginationOptions, IPagingObject } from '../../common/interfaces';
+import { IPaginationOptions, IPagingObject } from 'common/interfaces';
 
 export interface IPlaylistsProps {}
 

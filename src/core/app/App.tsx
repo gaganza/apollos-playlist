@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import cookie from 'react-cookies';
 
-import HomePage from '../../components/HomePage';
-import NotFound from '../../components/NotFound';
-import SignIn from '../../components/SignIn';
-import Playlist from '../../components/Playlist';
-import Playlists from '../../components/Playlists';
-import ResponsiveDrawer from '../../components/ResponsiveDrawer/ResponsiveDrawer';
+import HomePage from 'components/HomePage';
+import NotFound from 'components/NotFound';
+import SignIn from 'components/SignIn';
+import Playlist from 'components/Playlist';
+import Playlists from 'components/Playlists';
+import ResponsiveDrawer from 'components/ResponsiveDrawer/ResponsiveDrawer';
 
 import { TAppProps } from './interfaces';
 

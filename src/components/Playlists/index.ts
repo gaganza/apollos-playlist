@@ -5,7 +5,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 
 import Playlists from './Playlists';
 import { fetchPlaylists } from './actions';
-import { IPaginationOptions, IAction, IPagingObject, IRootState } from '../../common/interfaces';
+import { IPaginationOptions, IAction, IPagingObject, IRootState } from 'common/interfaces';
 import { IStateProps, IPlaylistsProps, IDispatchProps } from './interfaces';
 
 const mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IPlaylistsProps> = (

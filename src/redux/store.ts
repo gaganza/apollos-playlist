@@ -3,10 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import SpotifyWebApi from 'spotify-web-api-node';
 
-import { clientId, redirectUri } from '../authorization';
+import { clientId, redirectUri } from 'authorization';
 
 import rootReducer from './rootReducer';
-import { IRootState } from '../common/interfaces';
+import { IRootState } from 'common/interfaces';
 
 const defaultState: IRootState = {
   spotifyWebApi: new SpotifyWebApi({

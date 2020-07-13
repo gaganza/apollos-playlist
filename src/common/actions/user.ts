@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 import { ThunkAction } from 'redux-thunk';
 import SpotifyWebApi from 'spotify-web-api-node';
 
-import { IRootState, IAction, Response } from '../interfaces';
+import { IRootState, IAction, Response } from 'common/interfaces';
 
 export enum USER {
   RECEIVE_USER = 'user/RECEIVE_USER',

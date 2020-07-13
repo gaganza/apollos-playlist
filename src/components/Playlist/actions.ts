@@ -2,7 +2,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import { Dispatch } from 'react';
 import { ThunkAction } from 'redux-thunk';
 
-import { IAction, Response, IRootState } from '../../common/interfaces';
+import { IAction, Response, IRootState } from 'common/interfaces';
 
 export enum PLAYLIST {
   RECEIVE_PLAYLIST = 'playlist/RECEIVE_PLAYLIST',

@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
 
 import { PlaylistCard } from './subcomponents';
-import { PLAYLIST_RESULTS_PER_PAGE } from '../../common/constants';
+import { PLAYLIST_RESULTS_PER_PAGE } from 'common/constants';
 import { TPlaylistsProps, IPlaylistsState } from './interfaces';
 
 import './styles.scss';
