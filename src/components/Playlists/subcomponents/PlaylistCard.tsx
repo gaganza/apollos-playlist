@@ -10,8 +10,6 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 
-import { IPlaylists } from "../../../common/interfaces";
-
 const cardTheme = createMuiTheme({
   overrides: {
     MuiCard: {
@@ -26,7 +24,7 @@ const cardTheme = createMuiTheme({
   },
 });
 
-class PlaylistCard extends React.PureComponent<IPlaylists> {
+class PlaylistCard extends React.PureComponent<SpotifyApi.PlaylistObjectSimplified> {
   public render(): JSX.Element {
     let { name, images, id } = this.props;
 

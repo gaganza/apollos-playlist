@@ -4,7 +4,6 @@ import Pagination from "@material-ui/lab/Pagination";
 
 import { PlaylistCard } from "./subcomponents";
 import { PLAYLIST_RESULTS_PER_PAGE } from "../../common/constants";
-import { IPlaylists } from "../../common/interfaces";
 import { TPlaylistsProps, IPlaylistsState } from "./interfaces";
 
 import "./styles.scss";
@@ -30,7 +29,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     // no URL params
     if (location.search === "") {
       if (playlists === null) {
-        await fetchPlaylistsData(spotifyWebApi, user.id, {
+        await fetchPlaylistsData(spotifyWebApi, user!.id, {
           limit: PLAYLIST_RESULTS_PER_PAGE,
           offset: 0,
         });
@@ -43,8 +42,8 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
     page: number
   ) => {
     let { fetchPlaylistsData, spotifyWebApi, user, playlists } = this.props;
-    if (playlists.items[page] === undefined) {
-      fetchPlaylistsData(spotifyWebApi, user.id, {
+    if (playlists!.items[page] === undefined) {
+      fetchPlaylistsData(spotifyWebApi, user!.id, {
         limit: PLAYLIST_RESULTS_PER_PAGE,
         offset: (page - 1) * PLAYLIST_RESULTS_PER_PAGE,
       });
@@ -67,7 +66,7 @@ class Playlists extends React.PureComponent<TPlaylistsProps, IPlaylistsState> {
         >
           <Grid container spacing={3}>
             {playlists.items[page] &&
-              playlists.items[page].map((playlist: IPlaylists) => {
+              playlists.items[page].map((playlist: SpotifyApi.PlaylistObjectSimplified) => {
                 return (
                   <Grid item xs={12} md={6} lg={4} xl={3} key={playlist.id}>
                     <PlaylistCard {...playlist} />

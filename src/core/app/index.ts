@@ -9,7 +9,7 @@ import { ThunkDispatch } from "redux-thunk";
 
 import App from "./App";
 import { setGlobalSpotifyClient, fetchUserData } from "../../common/actions";
-import { IAction, IRootState, ICurrentProfile } from "../../common/interfaces";
+import { IAction, IRootState } from "../../common/interfaces";
 import { IAppProps, IDispatchProps, IStateProps } from "./interfaces";
 
 const mapStateToProps: MapStateToPropsParam<
@@ -27,7 +27,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   IDispatchProps,
   IAppProps
 > = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<string | ICurrentProfile>>
+  dispatch: ThunkDispatch<IRootState, null, IAction<string> | IAction<SpotifyApi.CurrentUsersProfileResponse>>
 ): IDispatchProps => {
   return {
     setGlobalSpotifyClient: (token: string) =>

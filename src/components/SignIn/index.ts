@@ -9,7 +9,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 import SignIn from "./SignIn";
 import { setGlobalSpotifyClient, fetchUserData } from "../../common/actions";
-import { IAction, ICurrentProfile, IRootState } from "../../common/interfaces";
+import { IAction, IRootState } from "../../common/interfaces";
 import { IStateProps, ISignInProps, IDispatchProps } from "./interfaces";
 
 const mapStateToProps: MapStateToPropsParam<
@@ -26,7 +26,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   IDispatchProps,
   ISignInProps
 > = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<string | ICurrentProfile>>
+  dispatch: ThunkDispatch<IRootState, null, IAction<string> | IAction<SpotifyApi.CurrentUsersProfileResponse>>
 ): IDispatchProps => {
   return {
     setGlobalSpotifyClient: (token: string) =>

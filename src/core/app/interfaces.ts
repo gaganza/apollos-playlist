@@ -1,7 +1,7 @@
 import { RouteComponentProps } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-node";
 
-import { IAction, ICurrentProfile } from "../../common/interfaces";
+import { IAction } from "../../common/interfaces";
 
 export interface IAppProps {}
 
@@ -12,7 +12,7 @@ export interface IDispatchProps {
 
 export interface IStateProps {
   spotifyWebApi: SpotifyWebApi;
-  user: ICurrentProfile;
+  user: SpotifyApi.CurrentUsersProfileResponse | null;
 }
 
 export type TAppProps = IAppProps &

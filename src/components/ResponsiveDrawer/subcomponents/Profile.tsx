@@ -26,7 +26,7 @@ class Profile extends React.PureComponent<TProfileProps> {
           }}
         >
           <Avatar
-            alt={user.displayName}
+            alt={user.display_name}
             src={user.images && user.images[0] && user.images[0].url}
             style={{
               width: "100px",
@@ -40,7 +40,7 @@ class Profile extends React.PureComponent<TProfileProps> {
               wordWrap: "break-word",
             }}
           >
-            {user.displayName}
+            {user.display_name}
           </h1>
           <Divider />
         </div>
