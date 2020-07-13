@@ -1,72 +1,67 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import MenuIcon from "@material-ui/icons/Menu";
-import MusicNote from "@material-ui/icons/MusicNote";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import {
-  makeStyles,
-  useTheme,
-  Theme,
-  createStyles,
-} from "@material-ui/core/styles";
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuIcon from '@material-ui/icons/Menu';
+import MusicNote from '@material-ui/icons/MusicNote';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 
-import Profile from "./subcomponents/Profile";
-import { Link } from "react-router-dom";
+import Profile from './subcomponents/Profile';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: 'flex',
     },
     drawer: {
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up('sm')]: {
         width: drawerWidth,
         flexShrink: 0,
       },
     },
     appBar: {
-      backgroundColor: "#1D1E28",
-      [theme.breakpoints.up("sm")]: {
+      backgroundColor: '#1D1E28',
+      [theme.breakpoints.up('sm')]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
       },
 
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
       },
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
       },
     },
     // necessary for content to be below app bar
     toolbar: {
       ...theme.mixins.toolbar,
 
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
       },
     },
     drawerPaper: {
       width: drawerWidth,
-      backgroundColor: "#1D1E28",
+      backgroundColor: '#1D1E28',
     },
     content: {
       flexGrow: 1,
-      backgroundColor: "#d3d3d3",
+      backgroundColor: '#d3d3d3',
       padding: theme.spacing(3),
     },
   })
@@ -84,32 +79,27 @@ export default function ResponsiveDrawer(props: any) {
   const drawer = (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "inherit",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: 'inherit',
       }}
     >
       <div>
-        <h1 style={{ color: "white", padding: "8px 16px" }}>
-          Apollo's Playlist
-        </h1>
+        <h1 style={{ color: 'white', padding: '8px 16px' }}>Apollo's Playlist</h1>
         <Divider />
         <List>
-          <Link to={"/playlists"} style={{ textDecoration: "none" }}>
-            <ListItem button key={"Playlists"}>
-              <MusicNote style={{ color: "white" }} />
-              <ListItemText primary={"Playlists"} style={{ color: "white" }} />
+          <Link to={'/playlists'} style={{ textDecoration: 'none' }}>
+            <ListItem button key={'Playlists'}>
+              <MusicNote style={{ color: 'white' }} />
+              <ListItemText primary={'Playlists'} style={{ color: 'white' }} />
             </ListItem>
           </Link>
 
-          <Link to={"create-a-playlist"} style={{ textDecoration: "none" }}>
-            <ListItem button key={"Create a Playlists"}>
-              <MusicNote style={{ color: "white" }} />
-              <ListItemText
-                primary={"Create a Playlists"}
-                style={{ color: "white" }}
-              />
+          <Link to={'create-a-playlist'} style={{ textDecoration: 'none' }}>
+            <ListItem button key={'Create a Playlists'}>
+              <MusicNote style={{ color: 'white' }} />
+              <ListItemText primary={'Create a Playlists'} style={{ color: 'white' }} />
             </ListItem>
           </Link>
         </List>
@@ -148,7 +138,7 @@ export default function ResponsiveDrawer(props: any) {
           <Drawer
             container={container}
             variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{

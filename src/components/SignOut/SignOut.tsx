@@ -1,16 +1,16 @@
-import * as React from "react";
-import cookie from "react-cookies";
+import * as React from 'react';
+import cookie from 'react-cookies';
 
-import { TSignOutProps } from "./interfaces";
+import { TSignOutProps } from './interfaces';
 class SignOut extends React.PureComponent<TSignOutProps> {
-  public onClickHandler: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  public onClickHandler: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void = (
+    _: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     let { setGlobalSpotifyClient, history } = this.props;
-    cookie.remove("spotify-bearer", { path: "/" });
+    cookie.remove('spotify-bearer', { path: '/' });
 
-    setGlobalSpotifyClient(cookie.load("spotify-bearer"));
-    history.push("/");
+    setGlobalSpotifyClient(cookie.load('spotify-bearer'));
+    history.push('/');
   };
 
   public render(): JSX.Element {

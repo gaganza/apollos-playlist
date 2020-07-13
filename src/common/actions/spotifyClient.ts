@@ -1,7 +1,7 @@
-import { IAction } from "../interfaces";
+import { IAction } from '../interfaces';
 
 export enum SPOTIFT_API {
-  SET_GLOBAL_SPOTIFY_CLIENT_TOKEN = "spotifyApi/SET_GLOBAL_SPOTIFY_CLIENT_TOKEN",
+  SET_GLOBAL_SPOTIFY_CLIENT_TOKEN = 'spotifyApi/SET_GLOBAL_SPOTIFY_CLIENT_TOKEN',
 }
 
 export const setGlobalSpotifyClient = (token: string): IAction<string> => {

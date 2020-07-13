@@ -1,7 +1,7 @@
-import { RouteComponentProps } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-node";
+import { RouteComponentProps } from 'react-router-dom';
+import SpotifyWebApi from 'spotify-web-api-node';
 
-import { IAction } from "../../common/interfaces";
+import { IAction } from '../../common/interfaces';
 
 export interface IAppProps {}
 
@@ -15,7 +15,4 @@ export interface IStateProps {
   user: SpotifyApi.CurrentUsersProfileResponse | null;
 }
 
-export type TAppProps = IAppProps &
-  IStateProps &
-  IDispatchProps &
-  RouteComponentProps;
+export type TAppProps = IAppProps & IStateProps & IDispatchProps & RouteComponentProps;

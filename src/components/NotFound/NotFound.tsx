@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { TNotFoundProps } from "./interfaces";
+import { TNotFoundProps } from './interfaces';
 
 class NotFound extends React.PureComponent<TNotFoundProps> {
   public render(): JSX.Element {
