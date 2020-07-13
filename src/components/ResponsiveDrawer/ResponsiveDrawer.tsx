@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ResponsiveDrawer(props) {
+export default function ResponsiveDrawer(props: any) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -116,7 +116,7 @@ export default function ResponsiveDrawer(props) {
         <Divider />
       </div>
       <div>
-        <Profile />
+        {/* <Profile /> */}
       </div>
     </div>
   );

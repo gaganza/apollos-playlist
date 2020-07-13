@@ -1,18 +1,16 @@
-import { IAction, Response, ICurrentProfile } from "../interfaces";
-import SpotifyWebApi from "spotify-web-api-node";
-import camelize from "camelize";
 import { Dispatch } from "react";
 import { ThunkAction } from "redux-thunk";
+import SpotifyWebApi from "spotify-web-api-node";
 
-import { IRootState } from "../interfaces";
+import { IRootState, IAction, Response } from "../interfaces";
 
 export enum USER {
   RECEIVE_USER_DATA = "user/RECEIVE_USER_DATA",
 }
 
 export const receiveUserData = (
-  data: ICurrentProfile
-): IAction<ICurrentProfile> => {
+  data: SpotifyApi.CurrentUsersProfileResponse
+): IAction<SpotifyApi.CurrentUsersProfileResponse> => {
   return { type: USER.RECEIVE_USER_DATA, data };
 };
 
@@ -22,13 +20,13 @@ export const fetchUserData = (
   Promise<void>,
   IRootState,
   unknown,
-  IAction<ICurrentProfile>
+  IAction<SpotifyApi.CurrentUsersProfileResponse>
 > => {
-  return (dispatch: Dispatch<IAction<ICurrentProfile>>): Promise<void> => {
+  return (dispatch: Dispatch<IAction<SpotifyApi.CurrentUsersProfileResponse>>): Promise<void> => {
     return api
       .getMe()
       .then((response: Response<SpotifyApi.CurrentUsersProfileResponse>) => {
-        dispatch(receiveUserData(camelize(response.body)));
+        dispatch(receiveUserData(response.body));
       });
   };
 };

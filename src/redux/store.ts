@@ -22,7 +22,7 @@ function configureStore(
 ): Store<IRootState> {
   return createStore(
     rootReducer,
-    preloadedState as any,
+    preloadedState,
     composeWithDevTools(applyMiddleware(thunk))
   );
 }

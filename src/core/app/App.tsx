@@ -6,7 +6,6 @@ import HomePage from "../../components/HomePage";
 import NotFound from "../../components/NotFound";
 import SignIn from "../../components/SignIn";
 import Playlists from "../../components/Playlists";
-import Playlist from "../../components/Playlist";
 import ResponsiveDrawer from "../../components/ResponsiveDrawer/ResponsiveDrawer";
 
 import { TAppProps } from "./interfaces";
@@ -49,7 +48,6 @@ class App extends React.PureComponent<TAppProps> {
       <div className="apollos-playlist-container">
         <ResponsiveDrawer>
           <Switch>
-            <Route path="/playlists/:playlistId" component={Playlist} />
             <Route exact path="/playlists" component={Playlists} />
             <Route path="*" component={NotFound} />
           </Switch>

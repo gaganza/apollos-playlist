@@ -1,13 +1,11 @@
-import { combineReducers, Reducer } from "redux";
+import { combineReducers } from "redux";
 
 import { playlistsReducer } from "../components/Playlists/reducer";
 import { clientReducer, userReducer } from "../common/reducers";
-import { IRootState } from "../common/interfaces";
 
-const rootReducer: Reducer<IRootState> = combineReducers({
+export default combineReducers({
   spotifyWebApi: clientReducer,
   user: userReducer,
   playlists: playlistsReducer,
 });
 
-export default rootReducer;

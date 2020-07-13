@@ -1,12 +1,12 @@
 import merge from "lodash/merge";
 
 import { PLAYLISTS } from "./actions";
-import { IAction, IPagingObject, IPlaylists } from "../../common/interfaces";
+import { IAction, IPagingObject } from "../../common/interfaces";
 
 export function playlistsReducer(
-  state: IPagingObject<IPlaylists> = null,
-  action: IAction<IPagingObject<IPlaylists>>
-): IPagingObject<IPlaylists> {
+  state: IPagingObject<SpotifyApi.PlaylistObjectSimplified> | null = null,
+  action: IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>
+): IPagingObject<SpotifyApi.PlaylistObjectSimplified> | null {
   switch (action.type) {
     case PLAYLISTS.RECEIVE_PLAYLISTS_DATA:
       return merge({}, state, action.data);

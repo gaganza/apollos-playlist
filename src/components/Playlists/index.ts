@@ -13,7 +13,6 @@ import {
   IPaginationOptions,
   IAction,
   IPagingObject,
-  IPlaylists,
   IRootState,
 } from "../../common/interfaces";
 import { IStateProps, IPlaylistsProps, IDispatchProps } from "./interfaces";
@@ -22,13 +21,13 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   IDispatchProps,
   IPlaylistsProps
 > = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<IPagingObject<IPlaylists>>>
+  dispatch: ThunkDispatch<IRootState, null, IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>>
 ): IDispatchProps => {
   return {
     fetchPlaylistsData: (
       api: SpotifyWebApi,
       userId: string,
-      options?: IPaginationOptions
+      options: IPaginationOptions
     ) => dispatch(fetchPlaylistsData(api, userId, options)),
   };
 };

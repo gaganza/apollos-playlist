@@ -1,10 +1,10 @@
 import { USER } from "../actions";
-import { IAction, ICurrentProfile } from "../interfaces";
+import { IAction } from "../interfaces";
 
 export function userReducer(
-  state: ICurrentProfile = null,
-  action: IAction<ICurrentProfile>
-): ICurrentProfile {
+  state: SpotifyApi.CurrentUsersProfileResponse | null = null,
+  action: IAction<SpotifyApi.CurrentUsersProfileResponse>
+): SpotifyApi.CurrentUsersProfileResponse | null{
   switch (action.type) {
     case USER.RECEIVE_USER_DATA:
       return action.data;
