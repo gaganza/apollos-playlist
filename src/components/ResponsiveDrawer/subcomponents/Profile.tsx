@@ -10,9 +10,7 @@ class Profile extends React.PureComponent<TProfileProps> {
   public render(): JSX.Element | null {
     let { user } = this.props;
 
-    if (user == null) {
-      return null;
-    }
+    if (!user) return null;
 
     return (
       <div>
@@ -59,4 +57,4 @@ const mapStateToProps: MapStateToPropsParam<
   };
 };
 
-export default withRouter(connect(mapStateToProps, null)(Profile));
+export default withRouter(connect(mapStateToProps)(Profile));
