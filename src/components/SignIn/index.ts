@@ -1,36 +1,26 @@
-import {
-  connect,
-  MapStateToPropsParam,
-  MapDispatchToPropsFunction,
-} from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
-import { withRouter } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-node";
+import { connect, MapStateToPropsParam, MapDispatchToPropsFunction } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { withRouter } from 'react-router-dom';
+import SpotifyWebApi from 'spotify-web-api-node';
 
-import SignIn from "./SignIn";
-import { setGlobalSpotifyClient, fetchUser } from "../../common/actions";
-import { IAction, IRootState } from "../../common/interfaces";
-import { IStateProps, ISignInProps, IDispatchProps } from "./interfaces";
+import SignIn from './SignIn';
+import { setGlobalSpotifyClient, fetchUser } from '../../common/actions';
+import { IAction, IRootState } from '../../common/interfaces';
+import { IStateProps, ISignInProps, IDispatchProps } from './interfaces';
 
-const mapStateToProps: MapStateToPropsParam<
-  IStateProps,
-  ISignInProps,
-  IRootState
-> = (state: IRootState): IStateProps => {
+const mapStateToProps: MapStateToPropsParam<IStateProps, ISignInProps, IRootState> = (
+  state: IRootState
+): IStateProps => {
   return {
     spotifyWebApi: state.spotifyWebApi,
   };
 };
 
-const mapDispatchToProps: MapDispatchToPropsFunction<
-  IDispatchProps,
-  ISignInProps
-> = (
+const mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, ISignInProps> = (
   dispatch: ThunkDispatch<IRootState, null, IAction<string> | IAction<SpotifyApi.CurrentUsersProfileResponse>>
 ): IDispatchProps => {
   return {
-    setGlobalSpotifyClient: (token: string) =>
-      dispatch(setGlobalSpotifyClient(token)),
+    setGlobalSpotifyClient: (token: string) => dispatch(setGlobalSpotifyClient(token)),
     fetchUser: (api: SpotifyWebApi) => dispatch(fetchUser(api)),
   };
 };

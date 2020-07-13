@@ -1,35 +1,28 @@
-import * as React from "react";
-import SpotifyLogin from "react-spotify-login";
-import camelize from "camelize";
-import cookie from "react-cookies";
+import * as React from 'react';
+import SpotifyLogin from 'react-spotify-login';
+import camelize from 'camelize';
+import cookie from 'react-cookies';
 
-import { redirectUri, clientId, scopes } from "../../authorization";
+import { redirectUri, clientId, scopes } from '../../authorization';
 
-import {
-  IAuthorizationResponse,
-  IAuthorizationErrorResponse,
-} from "../../common/interfaces";
-import { TSignInProps } from "./interfaces";
+import { IAuthorizationResponse, IAuthorizationErrorResponse } from '../../common/interfaces';
+import { TSignInProps } from './interfaces';
 
 class SignIn extends React.PureComponent<TSignInProps> {
-  public onSuccessHandler: (data: IAuthorizationResponse) => void = async (
-    data: IAuthorizationResponse
-  ) => {
+  public onSuccessHandler: (data: IAuthorizationResponse) => void = async (data: IAuthorizationResponse) => {
     let { setGlobalSpotifyClient, history, fetchUser } = this.props;
 
-    cookie.save("spotify-bearer", camelize(data).accessToken, {
-      path: "/",
+    cookie.save('spotify-bearer', camelize(data).accessToken, {
+      path: '/',
     });
 
-    setGlobalSpotifyClient(cookie.load("spotify-bearer"));
+    setGlobalSpotifyClient(cookie.load('spotify-bearer'));
     await fetchUser(this.props.spotifyWebApi).then((_: void) => {
-      history.push("/playlists");
+      history.push('/playlists');
     });
   };
 
-  public onErrorHandler: (data: IAuthorizationErrorResponse) => void = (
-    data: IAuthorizationErrorResponse
-  ) => {
+  public onErrorHandler: (data: IAuthorizationErrorResponse) => void = (data: IAuthorizationErrorResponse) => {
     console.log(data.name, data.message);
   };
 

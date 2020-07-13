@@ -1,12 +1,12 @@
-import * as React from "react";
-import Grid from "@material-ui/core/Grid";
-import Pagination from "@material-ui/lab/Pagination";
+import * as React from 'react';
+import Grid from '@material-ui/core/Grid';
+import Pagination from '@material-ui/lab/Pagination';
 
-import { PlaylistCard } from "./subcomponents";
-import { PLAYLIST_RESULTS_PER_PAGE } from "../../common/constants";
-import { TPlaylistsProps, IPlaylistsState } from "./interfaces";
+import { PlaylistCard } from './subcomponents';
+import { PLAYLIST_RESULTS_PER_PAGE } from '../../common/constants';
+import { TPlaylistsProps, IPlaylistsState } from './interfaces';
 
-import "./styles.scss";
+import './styles.scss';
 
 class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
   public constructor(props: TPlaylistsProps) {
@@ -18,16 +18,10 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
   }
 
   public async componentDidMount(): Promise<void> {
-    let {
-      location,
-      spotifyWebApi,
-      fetchPlaylists,
-      user,
-      playlists,
-    } = this.props;
+    let { location, spotifyWebApi, fetchPlaylists, user, playlists } = this.props;
 
     // no URL params
-    if (location.search === "") {
+    if (location.search === '') {
       if (playlists === null) {
         await fetchPlaylists(spotifyWebApi, user!.id, {
           limit: PLAYLIST_RESULTS_PER_PAGE,
@@ -37,10 +31,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
     }
   }
 
-  public handlePaginationChange = (
-    _: React.ChangeEvent<unknown>,
-    page: number
-  ) => {
+  public handlePaginationChange = (_: React.ChangeEvent<unknown>, page: number) => {
     let { fetchPlaylists, spotifyWebApi, user, playlists } = this.props;
     if (playlists!.items[page] === undefined) {
       fetchPlaylists(spotifyWebApi, user!.id, {
@@ -59,9 +50,9 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
       return (
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <Grid container spacing={3}>

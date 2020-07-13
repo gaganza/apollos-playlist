@@ -1,10 +1,7 @@
-import { RouteComponentProps } from "react-router-dom";
-import SpotifyWebApi from "spotify-web-api-node";
+import { RouteComponentProps } from 'react-router-dom';
+import SpotifyWebApi from 'spotify-web-api-node';
 
-import {
-  IPaginationOptions,
-  IPagingObject,
-} from "../../common/interfaces";
+import { IPaginationOptions, IPagingObject } from '../../common/interfaces';
 
 export interface IPlaylistsProps {}
 
@@ -13,11 +10,7 @@ export interface IPlaylistsState {
 }
 
 export interface IDispatchProps {
-  fetchPlaylists: (
-    api: SpotifyWebApi,
-    userId: string,
-    options: IPaginationOptions
-  ) => Promise<void>;
+  fetchPlaylists: (api: SpotifyWebApi, userId: string, options: IPaginationOptions) => Promise<void>;
 }
 
 export interface IStateProps {
@@ -26,7 +19,4 @@ export interface IStateProps {
   playlists: IPagingObject<SpotifyApi.PlaylistObjectSimplified> | null;
 }
 
-export type TPlaylistsProps = IPlaylistsProps &
-  IStateProps &
-  RouteComponentProps &
-  IDispatchProps;
+export type TPlaylistsProps = IPlaylistsProps & IStateProps & RouteComponentProps & IDispatchProps;

@@ -1,12 +1,12 @@
-import { createStore, applyMiddleware, Store } from "redux";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import SpotifyWebApi from "spotify-web-api-node";
+import { createStore, applyMiddleware, Store } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import SpotifyWebApi from 'spotify-web-api-node';
 
-import { clientId, redirectUri } from "../authorization";
+import { clientId, redirectUri } from '../authorization';
 
-import rootReducer from "./rootReducer";
-import { IRootState } from "../common/interfaces";
+import rootReducer from './rootReducer';
+import { IRootState } from '../common/interfaces';
 
 const defaultState: IRootState = {
   spotifyWebApi: new SpotifyWebApi({
@@ -15,17 +15,11 @@ const defaultState: IRootState = {
   }),
   user: null,
   playlist: null,
-  playlists: null
+  playlists: null,
 };
 
-function configureStore(
-  preloadedState: IRootState = defaultState
-): Store<IRootState> {
-  return createStore(
-    rootReducer,
-    preloadedState,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
+function configureStore(preloadedState: IRootState = defaultState): Store<IRootState> {
+  return createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(thunk)));
 }
 
 export default configureStore;

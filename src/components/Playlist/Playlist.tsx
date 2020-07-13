@@ -1,7 +1,7 @@
-import * as React from "react";
-import Grid from "@material-ui/core/Grid";
+import * as React from 'react';
+import Grid from '@material-ui/core/Grid';
 
-import { TPlaylistProps } from "./interfaces";
+import { TPlaylistProps } from './interfaces';
 
 class Playlist extends React.PureComponent<TPlaylistProps> {
   public constructor(props: TPlaylistProps) {
@@ -11,10 +11,7 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
   public componentDidMount(): void {
     let { location, spotifyWebApi, fetchPlaylist } = this.props;
 
-    let playlistId: string = location.pathname.substring(
-      location.pathname.lastIndexOf("/") + 1
-    );
-
+    let playlistId: string = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
     fetchPlaylist(spotifyWebApi, playlistId);
   }
@@ -24,8 +21,11 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
 
     if (!playlist) return null;
 
-
-    return <Grid container spacing={3}>Hello World</Grid>;
+    return (
+      <Grid container spacing={3}>
+        Hello World
+      </Grid>
+    );
   }
 }
 
