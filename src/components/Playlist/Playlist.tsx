@@ -27,7 +27,13 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
   public renderPlaylistArtwork(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
     if (!playlist || !playlist.images || playlist.images.length === 0) return null;
 
-    return <img src={playlist.images[0].url} alt={`${playlist.name} playlist artwork`} />;
+    return (
+      <img
+        src={playlist.images[0].url}
+        style={{ maxWidth: '300px', maxHeight: '300px ' }}
+        alt={`${playlist.name} playlist artwork`}
+      />
+    );
   }
 
   public renderPlaylistName(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
