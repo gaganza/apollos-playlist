@@ -1,4 +1,4 @@
-import { IAction } from '../interfaces';
+import { IAction } from 'common/interfaces';
 
 export enum SPOTIFT_API {
   SET_GLOBAL_SPOTIFY_CLIENT_TOKEN = 'spotifyApi/SET_GLOBAL_SPOTIFY_CLIENT_TOKEN',

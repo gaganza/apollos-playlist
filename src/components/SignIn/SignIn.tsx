@@ -3,9 +3,9 @@ import SpotifyLogin from 'react-spotify-login';
 import camelize from 'camelize';
 import cookie from 'react-cookies';
 
-import { redirectUri, clientId, scopes } from '../../authorization';
+import { redirectUri, clientId, scopes } from 'authorization';
 
-import { IAuthorizationResponse, IAuthorizationErrorResponse } from '../../common/interfaces';
+import { IAuthorizationResponse, IAuthorizationErrorResponse } from 'common/interfaces';
 import { TSignInProps } from './interfaces';
 
 class SignIn extends React.PureComponent<TSignInProps> {

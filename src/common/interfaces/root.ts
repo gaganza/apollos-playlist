@@ -1,5 +1,6 @@
 import SpotifyWebApi from 'spotify-web-api-node';
-import { IPagingObject } from '.';
+
+import { IPagingObject } from 'common/interfaces';
 
 export interface IRootState {
   spotifyWebApi: SpotifyWebApi;

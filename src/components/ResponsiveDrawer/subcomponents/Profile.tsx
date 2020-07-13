@@ -1,10 +1,10 @@
-import * as React from "react";
-import { MapStateToPropsParam, connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { Divider, Avatar } from "@material-ui/core";
+import * as React from 'react';
+import { MapStateToPropsParam, connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Divider, Avatar } from '@material-ui/core';
 
-import { IRootState } from "../../../common/interfaces";
-import { TProfileProps, IStateProps, IProfileProps } from "./interfaces";
+import { IRootState } from 'common/interfaces';
+import { TProfileProps, IStateProps, IProfileProps } from './interfaces';
 
 class Profile extends React.PureComponent<TProfileProps> {
   public render(): JSX.Element | null {
@@ -18,24 +18,24 @@ class Profile extends React.PureComponent<TProfileProps> {
         <br />
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <Avatar
             alt={user.display_name}
             src={user.images && user.images[0] && user.images[0].url}
             style={{
-              width: "100px",
-              height: "100px",
+              width: '100px',
+              height: '100px',
             }}
           />
           <h1
             style={{
-              color: "white",
-              padding: "8px 16px",
-              wordWrap: "break-word",
+              color: 'white',
+              padding: '8px 16px',
+              wordWrap: 'break-word',
             }}
           >
             {user.display_name}
@@ -47,11 +47,9 @@ class Profile extends React.PureComponent<TProfileProps> {
   }
 }
 
-const mapStateToProps: MapStateToPropsParam<
-  IStateProps,
-  IProfileProps,
-  IRootState
-> = (state: IRootState): IStateProps => {
+const mapStateToProps: MapStateToPropsParam<IStateProps, IProfileProps, IRootState> = (
+  state: IRootState
+): IStateProps => {
   return {
     user: state.user,
   };

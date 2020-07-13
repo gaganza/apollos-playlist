@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 
 import { PLAYLIST } from './actions';
-import { IAction } from '../../common/interfaces';
+import { IAction } from 'common/interfaces';
 
 export function playlistReducer(
   state: SpotifyApi.SinglePlaylistResponse | null = null,

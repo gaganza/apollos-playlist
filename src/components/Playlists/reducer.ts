@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 
 import { PLAYLISTS } from './actions';
-import { IAction, IPagingObject } from '../../common/interfaces';
+import { IAction, IPagingObject } from 'common/interfaces';
 
 export function playlistsReducer(
   state: IPagingObject<SpotifyApi.PlaylistObjectSimplified> | null = null,
