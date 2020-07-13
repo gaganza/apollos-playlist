@@ -21,7 +21,11 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
   IDispatchProps,
   IPlaylistsProps
 > = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>>
+  dispatch: ThunkDispatch<
+    IRootState,
+    null,
+    IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>
+  >
 ): IDispatchProps => {
   return {
     fetchPlaylists: (

@@ -116,7 +116,7 @@ export default function ResponsiveDrawer(props: any) {
         <Divider />
       </div>
       <div>
-        {/* <Profile /> */}
+        <Profile />
       </div>
     </div>
   );
