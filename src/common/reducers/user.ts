@@ -6,7 +6,7 @@ export function userReducer(
   action: IAction<SpotifyApi.CurrentUsersProfileResponse>
 ): SpotifyApi.CurrentUsersProfileResponse | null{
   switch (action.type) {
-    case USER.RECEIVE_USER_DATA:
+    case USER.RECEIVE_USER:
       return action.data;
 
     default:

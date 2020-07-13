@@ -5,6 +5,7 @@ import cookie from "react-cookies";
 import HomePage from "../../components/HomePage";
 import NotFound from "../../components/NotFound";
 import SignIn from "../../components/SignIn";
+import Playlist from "../../components/Playlist";
 import Playlists from "../../components/Playlists";
 import ResponsiveDrawer from "../../components/ResponsiveDrawer/ResponsiveDrawer";
 
@@ -14,14 +15,14 @@ import "./styles.scss";
 
 class App extends React.PureComponent<TAppProps> {
   public async componentDidMount() {
-    let { setGlobalSpotifyClient, fetchUserData, history } = this.props;
+    let { setGlobalSpotifyClient, fetchUser, history } = this.props;
 
     setGlobalSpotifyClient(cookie.load("spotify-bearer"));
 
     let { spotifyWebApi } = this.props;
 
     if (spotifyWebApi.getAccessToken() !== undefined) {
-      await fetchUserData(spotifyWebApi).then((_: void) => {
+      await fetchUser(spotifyWebApi).then((_: void) => {
         if (history.location.pathname === "/") {
           history.push("/playlists");
         }
@@ -48,6 +49,7 @@ class App extends React.PureComponent<TAppProps> {
       <div className="apollos-playlist-container">
         <ResponsiveDrawer>
           <Switch>
+            <Route path="/playlists/:playlistId" component={Playlist} />
             <Route exact path="/playlists" component={Playlists} />
             <Route path="*" component={NotFound} />
           </Switch>

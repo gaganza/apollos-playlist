@@ -12,16 +12,16 @@ import {
 } from "../../common/interfaces";
 
 export enum PLAYLISTS {
-  RECEIVE_PLAYLISTS_DATA = "playlists/RECEIVE_PLAYLISTS_DATA",
+  RECEIVE_PLAYLISTS = "playlists/RECEIVE_PLAYLISTS",
 }
 
-export const receivePlaylistData = (
+export const receivePlaylist = (
   data: IPagingObject<SpotifyApi.PlaylistObjectSimplified>
 ): IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>> => {
-  return { type: PLAYLISTS.RECEIVE_PLAYLISTS_DATA, data };
+  return { type: PLAYLISTS.RECEIVE_PLAYLISTS, data };
 };
 
-export const fetchPlaylistsData = (
+export const fetchPlaylists = (
   api: SpotifyWebApi,
   userId: string,
   options: IPaginationOptions
@@ -46,7 +46,7 @@ export const fetchPlaylistsData = (
           },
         };
 
-        dispatch(receivePlaylistData(data));
+        dispatch(receivePlaylist(data));
       });
   };
 };

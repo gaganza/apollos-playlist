@@ -14,7 +14,8 @@ const defaultState: IRootState = {
     redirectUri,
   }),
   user: null,
-  playlists: null,
+  playlist: null,
+  playlists: null
 };
 
 function configureStore(

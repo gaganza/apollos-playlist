@@ -8,7 +8,7 @@ export function playlistsReducer(
   action: IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>
 ): IPagingObject<SpotifyApi.PlaylistObjectSimplified> | null {
   switch (action.type) {
-    case PLAYLISTS.RECEIVE_PLAYLISTS_DATA:
+    case PLAYLISTS.RECEIVE_PLAYLISTS:
       return merge({}, state, action.data);
 
     default:

@@ -13,7 +13,7 @@ export interface IPlaylistsState {
 }
 
 export interface IDispatchProps {
-  fetchPlaylistsData: (
+  fetchPlaylists: (
     api: SpotifyWebApi,
     userId: string,
     options: IPaginationOptions
