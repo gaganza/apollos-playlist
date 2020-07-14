@@ -7,4 +7,5 @@ export interface IRootState {
   user: SpotifyApi.CurrentUsersProfileResponse | null;
   playlists: IPagingObject<SpotifyApi.PlaylistObjectSimplified> | null;
   playlist: SpotifyApi.SinglePlaylistResponse | null;
+  tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse | null;
 }

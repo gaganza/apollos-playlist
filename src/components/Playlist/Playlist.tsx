@@ -4,12 +4,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import TableRow from '@material-ui/core/TableRow/TableRow';
+import TableCell from '@material-ui/core/TableCell/TableCell';
+import TableBody from '@material-ui/core/TableBody/TableBody';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
 
+import { capitalizeFirstLetter } from 'common/helpers';
+import { playlistToTrackIds, normalizeTrackAudioFeature } from './helpers';
 import { TPlaylistProps } from './interfaces';
-import TableCell from '@material-ui/core/TableCell/TableCell';
-import TableBody from '@material-ui/core/TableBody/TableBody';
+
+import { linearProgresTheme } from './themes';
+import { ThemeProvider } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress/LinearProgress';
+import { INormalizeAudioFeatures } from 'common/interfaces/tracksAttributes';
 
 class Playlist extends React.PureComponent<TPlaylistProps> {
   public constructor(props: TPlaylistProps) {
@@ -17,11 +24,17 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
   }
 
   public componentDidMount(): void {
-    let { location, spotifyWebApi, fetchPlaylist } = this.props;
+    window.scrollTo(0, 0);
+    let { location, spotifyWebApi, fetchPlaylist, fetchTracksAttributes } = this.props;
 
     let playlistId: string = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
-    fetchPlaylist(spotifyWebApi, playlistId);
+    fetchPlaylist(spotifyWebApi, playlistId).then(() => {
+      let { playlist } = this.props;
+
+      if (!playlist) return;
+      fetchTracksAttributes(spotifyWebApi, playlistToTrackIds(playlist));
+    });
   }
 
   public renderPlaylistArtwork(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
@@ -50,6 +63,36 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
         <PersonIcon />
         <Typography>{playlist.owner.display_name}</Typography>
       </div>
+    );
+  }
+
+  public renderAttributeBar(
+    normalizedData: INormalizeAudioFeatures,
+    attribute: keyof INormalizeAudioFeatures
+  ): JSX.Element {
+    return (
+      <div>
+        <Typography>{capitalizeFirstLetter(attribute)}</Typography>
+        <ThemeProvider theme={linearProgresTheme}>
+          <LinearProgress variant="determinate" value={normalizedData[attribute]} />
+        </ThemeProvider>
+      </div>
+    );
+  }
+
+  public renderPlaylistAnalysis(tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse): JSX.Element | null {
+    if (!tracksAttributes) return null;
+
+    let normalizedData: INormalizeAudioFeatures = normalizeTrackAudioFeature(tracksAttributes);
+
+    return (
+      <Grid container spacing={1} direction={'column'}>
+        <Grid item>{this.renderAttributeBar(normalizedData, 'acousticness')}</Grid>
+        <Grid item>{this.renderAttributeBar(normalizedData, 'danceability')}</Grid>
+        <Grid item>{this.renderAttributeBar(normalizedData, 'energy')}</Grid>
+        <Grid item>{this.renderAttributeBar(normalizedData, 'instrumentalness')}</Grid>
+        <Grid item>{this.renderAttributeBar(normalizedData, 'valence')}</Grid>
+      </Grid>
     );
   }
 
@@ -91,9 +134,12 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
   }
 
   public render(): JSX.Element | null {
-    let { playlist } = this.props;
+    let { location, playlist, tracksAttributes } = this.props;
 
-    if (!playlist) return null;
+    let playlistId: string = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+
+    if (!playlist || playlist.id !== playlistId) return null;
+    if (!tracksAttributes) return null;
 
     return (
       <Grid container spacing={3}>
@@ -104,6 +150,8 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
           {this.renderPlaylistName(playlist)}
           <br />
           {this.renderPlaylistOwner(playlist)}
+          <br />
+          {this.renderPlaylistAnalysis(tracksAttributes)}
         </Grid>
         <Grid item xs={12}>
           {this.renderTracks(playlist)}
