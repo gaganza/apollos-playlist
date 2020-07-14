@@ -7,6 +7,7 @@ import NotFound from 'components/NotFound';
 import SignIn from 'components/SignIn';
 import Playlist from 'components/Playlist';
 import Playlists from 'components/Playlists';
+import CreatePlaylist from 'components/CreatePlaylist';
 import ResponsiveDrawer from 'components/ResponsiveDrawer/ResponsiveDrawer';
 
 import { TAppProps } from './interfaces';
@@ -50,6 +51,7 @@ class App extends React.PureComponent<TAppProps> {
           <Switch>
             <Route path="/playlists/:playlistId" component={Playlist} />
             <Route exact path="/playlists" component={Playlists} />
+            <Route exact path="/create-playlist" component={CreatePlaylist} />
             <Route path="*" component={NotFound} />
           </Switch>
         </ResponsiveDrawer>
