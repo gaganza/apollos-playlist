@@ -29,12 +29,14 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
 
     let playlistId: string = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
-    fetchPlaylist(spotifyWebApi, playlistId).then(() => {
-      let { playlist } = this.props;
+    if (playlistId !== this.props.playlist?.id) {
+      fetchPlaylist(spotifyWebApi, playlistId).then(() => {
+        let { playlist } = this.props;
 
-      if (!playlist) return;
-      fetchTracksAttributes(spotifyWebApi, playlistToTrackIds(playlist));
-    });
+        if (!playlist) return;
+        fetchTracksAttributes(spotifyWebApi, playlistToTrackIds(playlist));
+      });
+    }
   }
 
   public renderPlaylistArtwork(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
