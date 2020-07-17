@@ -1,14 +1,14 @@
 import { INormalizeAudioFeatures } from 'common/interfaces/tracksAttributes';
 
-export function playlistToTrackIds(playlist: SpotifyApi.SinglePlaylistResponse): string[] {
+export const playlistToTrackIds = (playlist: SpotifyApi.SinglePlaylistResponse): string[] => {
   return playlist.tracks.items.map((item: SpotifyApi.PlaylistTrackObject) => {
     return item.track.id;
   });
-}
+};
 
-export function normalizeTrackAudioFeature(
+export const normalizeTrackAudioFeature = (
   tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse
-): INormalizeAudioFeatures {
+): INormalizeAudioFeatures => {
   let normalized: INormalizeAudioFeatures = {
     acousticness: 0.0,
     danceability: 0.0,
@@ -34,4 +34,4 @@ export function normalizeTrackAudioFeature(
   normalized.valence = (normalized.valence / count) * 100;
 
   return normalized;
-}
+};
