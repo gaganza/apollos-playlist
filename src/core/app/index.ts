@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import App from './App';
 import { setGlobalSpotifyClient, fetchUser } from 'common/actions';
 import { IAction, IRootState } from 'common/interfaces';
-import { IAppProps, IDispatchProps, IStateProps } from './interfaces';
+import { IDispatchProps, IStateProps } from './interfaces';
 
 const mapStateToProps = (state: IRootState): IStateProps => {
   return {
