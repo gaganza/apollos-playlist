@@ -122,7 +122,7 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
           </TableHead>
           <TableBody>
             {playlist.tracks.items.map((track: SpotifyApi.PlaylistTrackObject) => (
-              <TableRow>
+              <TableRow hover>
                 <TableCell>{track.track.name}</TableCell>
                 <TableCell>{track.track.artists[0].name}</TableCell>
                 <TableCell>{track.track.album.name}</TableCell>
