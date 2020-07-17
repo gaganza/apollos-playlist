@@ -19,8 +19,8 @@ const defaultState: IRootState = {
   tracksAttributes: null,
 };
 
-function configureStore(preloadedState: IRootState = defaultState): Store<IRootState> {
+const configureStore = (preloadedState: IRootState = defaultState): Store<IRootState> => {
   return createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(thunk)));
-}
+};
 
 export default configureStore;

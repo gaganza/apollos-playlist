@@ -3,9 +3,7 @@ import cookie from 'react-cookies';
 
 import { TSignOutProps } from './interfaces';
 class SignOut extends React.PureComponent<TSignOutProps> {
-  public onClickHandler: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void = (
-    _: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  public onClickHandler = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     let { setGlobalSpotifyClient, history } = this.props;
     cookie.remove('spotify-bearer', { path: '/' });
 

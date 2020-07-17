@@ -1,4 +1,4 @@
-import { MapStateToPropsParam, MapDispatchToPropsFunction, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { withRouter } from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-node';
@@ -7,9 +7,9 @@ import Playlist from './Playlist';
 import { fetchTracksAttributes } from 'common/actions';
 import { fetchPlaylist } from './actions';
 import { IAction, IRootState } from 'common/interfaces';
-import { IStateProps, IPlaylistProps, IDispatchProps } from './interfaces';
+import { IStateProps, IDispatchProps } from './interfaces';
 
-const mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IPlaylistProps> = (
+const mapDispatchToProps = (
   dispatch: ThunkDispatch<
     IRootState,
     null,
@@ -22,9 +22,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<IDispatchProps, IPlaylistPr
   };
 };
 
-const mapStateToProps: MapStateToPropsParam<IStateProps, IPlaylistProps, IRootState> = (
-  state: IRootState
-): IStateProps => {
+const mapStateToProps = (state: IRootState): IStateProps => {
   return {
     spotifyWebApi: state.spotifyWebApi,
     playlist: state.playlist,

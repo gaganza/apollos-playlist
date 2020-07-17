@@ -3,10 +3,10 @@ import merge from 'lodash/merge';
 import { PLAYLIST } from './actions';
 import { IAction } from 'common/interfaces';
 
-export function playlistReducer(
+export const playlistReducer = (
   state: SpotifyApi.SinglePlaylistResponse | null = null,
   action: IAction<SpotifyApi.SinglePlaylistResponse>
-): SpotifyApi.SinglePlaylistResponse | null {
+): SpotifyApi.SinglePlaylistResponse | null => {
   switch (action.type) {
     case PLAYLIST.RECEIVE_PLAYLIST:
       return merge({}, state, action.data);
@@ -14,4 +14,4 @@ export function playlistReducer(
     default:
       return state;
   }
-}
+};
