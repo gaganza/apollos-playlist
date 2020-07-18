@@ -14,6 +14,7 @@ import {
   FormControl,
 } from '@material-ui/core';
 
+import { Finalize } from './subcomponents';
 import { capitalizeFirstLetter } from 'common/helpers';
 import { Response, IAudioFeatures } from 'common/interfaces';
 import { TCreatePlaylistProps, ICreatePlaylistState } from './interfaces';
@@ -27,28 +28,29 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
     this.state = {
       query: {
         acousticness: {
-          min: 0.33,
-          max: 0.66,
+          min: 0.0,
+          max: 1.0,
         },
         danceability: {
-          min: 0.33,
-          max: 0.66,
+          min: 0.0,
+          max: 1.0,
         },
         energy: {
-          min: 0.33,
-          max: 0.66,
+          min: 0.0,
+          max: 1.0,
         },
         instrumentalness: {
-          min: 0.33,
-          max: 0.66,
+          min: 0.0,
+          max: 1.0,
         },
         valence: {
-          min: 0.33,
-          max: 0.66,
+          min: 0.0,
+          max: 1.0,
         },
       },
       results: null,
       selectedArtistsIds: [],
+      finalizeView: false,
     };
   }
 
@@ -93,8 +95,14 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
         limit: 50,
       })
       .then((response: Response<SpotifyApi.RecommendationsFromSeedsResponse>) => {
-        this.setState({ results: response.body });
-        debugger;
+        if (response.body.tracks.length > 0) {
+          this.setState({ results: response.body, finalizeView: true });
+        } else {
+          this.props.openSnackBar({
+            open: true,
+            message: 'Oops! Looks like you need to broaden your selection',
+          });
+        }
       });
   };
 
@@ -155,13 +163,17 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
                 </div>
               )}
             >
-              {artists.map(
-                (artist: SpotifyApi.ArtistObjectFull): JSX.Element => (
-                  <MenuItem key={artist.name} value={artist.id}>
-                    {artist.name}
-                  </MenuItem>
+              {artists
+                .sort((a: SpotifyApi.ArtistObjectFull, b: SpotifyApi.ArtistObjectFull) =>
+                  a.name < b.name ? -1 : a.name > b.name ? 1 : 0
                 )
-              )}
+                .map(
+                  (artist: SpotifyApi.ArtistObjectFull): JSX.Element => (
+                    <MenuItem key={artist.name} value={artist.id}>
+                      {artist.name}
+                    </MenuItem>
+                  )
+                )}
             </Select>
             {selectedArtistsIds.length > 3 && <FormHelperText>Please select 1 - 3 artists</FormHelperText>}
           </FormControl>
@@ -171,7 +183,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   };
 
   public render(): JSX.Element {
-    let { selectedArtistsIds } = this.state;
+    let { selectedArtistsIds, finalizeView } = this.state;
 
     let attributes: (keyof IAudioFeatures)[] = [
       'acousticness',
@@ -191,6 +203,10 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
       artists = artists.concat(longTerm.items.concat(mediumTerm.items.concat(shortTerm.items)));
 
       artists = artists.filter((e, i) => artists.findIndex((a) => a.id === e.id) === i);
+    }
+
+    if (finalizeView) {
+      return <Finalize history={this.props.history} api={this.props.spotifyWebApi} results={this.state.results!} />;
     }
 
     return (

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import cookie from 'react-cookies';
+import { Snackbar } from '@material-ui/core';
 
 import HomePage from 'components/HomePage';
 import NotFound from 'components/NotFound';
@@ -32,11 +33,13 @@ class App extends React.PureComponent<TAppProps> {
   }
 
   public render(): JSX.Element {
+    let { closeSnackbar, snackbar } = this.props;
     let isLoggedIn: boolean = this.props.spotifyWebApi.getAccessToken() !== undefined;
 
     if (!isLoggedIn) {
       return (
         <div className="apollos-playlist-container">
+          <Snackbar {...snackbar} onClose={closeSnackbar} />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <SignIn />
@@ -48,6 +51,7 @@ class App extends React.PureComponent<TAppProps> {
     return (
       <div className="apollos-playlist-container">
         <ResponsiveDrawer>
+          <Snackbar {...snackbar} onClose={closeSnackbar} />
           <Switch>
             <Route path="/playlists/:playlistId" component={Playlist} />
             <Route exact path="/playlists" component={Playlists} />
