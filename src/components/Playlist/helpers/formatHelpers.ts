@@ -1,4 +1,4 @@
-import { INormalizeAudioFeatures } from 'common/interfaces/tracksAttributes';
+import { IAudioFeatures } from 'common/interfaces';
 
 export const playlistToTrackIds = (playlist: SpotifyApi.SinglePlaylistResponse): string[] => {
   return playlist.tracks.items.map((item: SpotifyApi.PlaylistTrackObject) => {
@@ -8,8 +8,8 @@ export const playlistToTrackIds = (playlist: SpotifyApi.SinglePlaylistResponse):
 
 export const normalizeTrackAudioFeature = (
   tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse
-): INormalizeAudioFeatures => {
-  let normalized: INormalizeAudioFeatures = {
+): IAudioFeatures => {
+  let normalized: IAudioFeatures = {
     acousticness: 0.0,
     danceability: 0.0,
     energy: 0.0,

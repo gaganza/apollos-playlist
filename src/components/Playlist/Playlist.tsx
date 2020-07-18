@@ -8,15 +8,15 @@ import TableCell from '@material-ui/core/TableCell/TableCell';
 import TableBody from '@material-ui/core/TableBody/TableBody';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
+import LinearProgress from '@material-ui/core/LinearProgress/LinearProgress';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 import { capitalizeFirstLetter } from 'common/helpers';
 import { playlistToTrackIds, normalizeTrackAudioFeature } from './helpers';
+import { IAudioFeatures } from 'common/interfaces';
 import { TPlaylistProps } from './interfaces';
 
 import { linearProgresTheme } from './themes';
-import { ThemeProvider } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress/LinearProgress';
-import { INormalizeAudioFeatures } from 'common/interfaces/tracksAttributes';
 
 class Playlist extends React.PureComponent<TPlaylistProps> {
   public constructor(props: TPlaylistProps) {
@@ -68,10 +68,7 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
     );
   }
 
-  public renderAttributeBar(
-    normalizedData: INormalizeAudioFeatures,
-    attribute: keyof INormalizeAudioFeatures
-  ): JSX.Element {
+  public renderAttributeBar(normalizedData: IAudioFeatures, attribute: keyof IAudioFeatures): JSX.Element {
     return (
       <div>
         <Typography>{capitalizeFirstLetter(attribute)}</Typography>
@@ -85,7 +82,7 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
   public renderPlaylistAnalysis(tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse): JSX.Element | null {
     if (!tracksAttributes) return null;
 
-    let normalizedData: INormalizeAudioFeatures = normalizeTrackAudioFeature(tracksAttributes);
+    let normalizedData: IAudioFeatures = normalizeTrackAudioFeature(tracksAttributes);
 
     return (
       <Grid container spacing={1} direction={'column'}>
@@ -122,7 +119,7 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
           </TableHead>
           <TableBody>
             {playlist.tracks.items.map((track: SpotifyApi.PlaylistTrackObject) => (
-              <TableRow hover>
+              <TableRow hover key={`table-row-${track.track.id}`}>
                 <TableCell>{track.track.name}</TableCell>
                 <TableCell>{track.track.artists[0].name}</TableCell>
                 <TableCell>{track.track.album.name}</TableCell>

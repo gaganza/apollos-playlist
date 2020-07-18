@@ -17,6 +17,7 @@ const defaultState: IRootState = {
   playlist: null,
   playlists: null,
   tracksAttributes: null,
+  topArtists: null,
 };
 
 const configureStore = (preloadedState: IRootState = defaultState): Store<IRootState> => {

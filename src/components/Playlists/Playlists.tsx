@@ -59,7 +59,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
             {playlists.items[page] &&
               playlists.items[page].map((playlist: SpotifyApi.PlaylistObjectSimplified) => {
                 return (
-                  <Grid item xs={12} md={6} lg={4} xl={3} key={playlist.id}>
+                  <Grid item xs={12} md={6} lg={4} xl={3} key={`playlist-card-${playlist.id}`}>
                     <PlaylistCard {...playlist} />
                   </Grid>
                 );

@@ -38,7 +38,7 @@ Tempo:
     of a given piece and derives directly from the average beat duration.
 */
 
-export interface INormalizeAudioFeatures {
+export interface IAudioFeatures {
   acousticness: number;
   danceability: number;
   energy: number;
