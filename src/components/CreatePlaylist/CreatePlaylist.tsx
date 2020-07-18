@@ -10,6 +10,7 @@ import {
   Input,
   MenuItem,
   Avatar,
+  FormHelperText,
   FormControl,
 } from '@material-ui/core';
 
@@ -132,34 +133,38 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
 
     return (
       <>
-        <Typography>Seed artists</Typography>
+        <Typography>Suggested artists</Typography>
         <ThemeProvider theme={inputTheme}>
-          <Select
-            multiple
-            value={selectedArtistsIds}
-            onChange={this.handleArtistSelect}
-            input={<Input multiline />}
-            renderValue={(selected) => (
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {(selected as string[]).map((value) => (
-                  <ThemeProvider theme={chipTheme} key={value}>
-                    <Chip
-                      label={artists.find((a) => a.id === value)?.name}
-                      avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
-                    />
-                  </ThemeProvider>
-                ))}
-              </div>
-            )}
-          >
-            {artists.map(
-              (artist: SpotifyApi.ArtistObjectFull): JSX.Element => (
-                <MenuItem key={artist.name} value={artist.id}>
-                  {artist.name}
-                </MenuItem>
-              )
-            )}
-          </Select>
+          <FormControl error>
+            <Select
+              error={selectedArtistsIds.length > 3}
+              multiple
+              value={selectedArtistsIds}
+              onChange={this.handleArtistSelect}
+              input={<Input multiline />}
+              renderValue={(selected) => (
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {(selected as string[]).map((value) => (
+                    <ThemeProvider theme={chipTheme} key={value}>
+                      <Chip
+                        label={artists.find((a) => a.id === value)?.name}
+                        avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
+                      />
+                    </ThemeProvider>
+                  ))}
+                </div>
+              )}
+            >
+              {artists.map(
+                (artist: SpotifyApi.ArtistObjectFull): JSX.Element => (
+                  <MenuItem key={artist.name} value={artist.id}>
+                    {artist.name}
+                  </MenuItem>
+                )
+              )}
+            </Select>
+            {selectedArtistsIds.length > 3 && <FormHelperText>Please select 1 - 3 artists</FormHelperText>}
+          </FormControl>
         </ThemeProvider>
       </>
     );
@@ -216,7 +221,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
                 color={'primary'}
                 size={'medium'}
                 onClick={this.handleCreatePlaylistClick}
-                disabled={selectedArtistsIds.length === 0}
+                disabled={selectedArtistsIds.length === 0 || selectedArtistsIds.length > 3}
               >
                 Create
               </Button>
