@@ -1,5 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-node';
+import { SnackbarProps } from '@material-ui/core';
 
 import { IAudioAttribute } from 'common/interfaces';
 import { ITopArtistsReducer } from 'components/TopArtists/reducer';
@@ -17,10 +18,12 @@ export interface ICreatePlaylistState {
   query: IRecommendedQuery;
   results: SpotifyApi.RecommendationsFromSeedsResponse | null;
   selectedArtistsIds: string[];
+  finalizeView: boolean;
 }
 
 export interface IDispatchProps {
   fetchTopArtists: (api: SpotifyWebApi, timeRange: 'long_term' | 'medium_term' | 'short_term') => Promise<void>;
+  openSnackBar: (data: Partial<SnackbarProps>) => void;
 }
 
 export interface IStateProps {

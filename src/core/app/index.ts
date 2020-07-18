@@ -4,23 +4,34 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import { ThunkDispatch } from 'redux-thunk';
 
 import App from './App';
-import { setGlobalSpotifyClient, fetchUser } from 'common/actions';
+import { setGlobalSpotifyClient, fetchUser, closeSnackbar, openSnackbar } from 'common/actions';
 import { IAction, IRootState } from 'common/interfaces';
 import { IDispatchProps, IStateProps } from './interfaces';
+import { SnackbarProps } from '@material-ui/core';
 
 const mapStateToProps = (state: IRootState): IStateProps => {
   return {
     spotifyWebApi: state.spotifyWebApi,
     user: state.user,
+    snackbar: state.snackbar,
   };
 };
 
 const mapDispatchToProps = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<string> | IAction<SpotifyApi.CurrentUsersProfileResponse>>
+  dispatch: ThunkDispatch<
+    IRootState,
+    null,
+    | IAction<string>
+    | IAction<SpotifyApi.CurrentUsersProfileResponse>
+    | IAction<unknown>
+    | IAction<Partial<SnackbarProps>>
+  >
 ): IDispatchProps => {
   return {
     setGlobalSpotifyClient: (token: string) => dispatch(setGlobalSpotifyClient(token)),
     fetchUser: (api: SpotifyWebApi) => dispatch(fetchUser(api)),
+    openSnackbar: (data: Partial<SnackbarProps>) => dispatch(openSnackbar(data)),
+    closeSnackbar: () => dispatch(closeSnackbar()),
   };
 };
 

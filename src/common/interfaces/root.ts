@@ -1,4 +1,5 @@
 import SpotifyWebApi from 'spotify-web-api-node';
+import { SnackbarProps } from '@material-ui/core';
 
 import { IPagingObject } from 'common/interfaces';
 import { ITopArtistsReducer } from 'components/TopArtists/reducer';
@@ -10,4 +11,5 @@ export interface IRootState {
   playlist: SpotifyApi.SinglePlaylistResponse | null;
   tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse | null;
   topArtists: ITopArtistsReducer | null;
+  snackbar: SnackbarProps;
 }
