@@ -13,5 +13,11 @@ export const inputTheme = createMuiTheme({
         width: '100%',
       },
     },
+
+    MuiFormControl: {
+      root: {
+        width: '100%',
+      },
+    },
   },
 });

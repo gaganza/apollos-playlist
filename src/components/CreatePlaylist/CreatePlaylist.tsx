@@ -196,7 +196,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
     return (
       <Grid container spacing={3} alignItems={'center'}>
         <Grid item xs={12}>
-          <Typography variant={'h6'}>Create a Playlist!</Typography>
+          <Typography variant={'h6'}>Create a playlist</Typography>
         </Grid>
 
         <Grid item xs={12}>
