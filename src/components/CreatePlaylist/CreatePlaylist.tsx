@@ -10,13 +10,14 @@ import {
   Input,
   MenuItem,
   Avatar,
+  FormControl,
 } from '@material-ui/core';
 
 import { capitalizeFirstLetter } from 'common/helpers';
 import { Response, IAudioFeatures } from 'common/interfaces';
 import { TCreatePlaylistProps, ICreatePlaylistState } from './interfaces';
 
-import { buttonTheme, sliderTheme, inputTheme } from 'common/themes';
+import { buttonTheme, sliderTheme, inputTheme, chipTheme } from 'common/themes';
 
 class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlaylistState> {
   public constructor(props: TCreatePlaylistProps) {
@@ -137,15 +138,16 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
             multiple
             value={selectedArtistsIds}
             onChange={this.handleArtistSelect}
-            input={<Input />}
+            input={<Input multiline />}
             renderValue={(selected) => (
-              <div>
+              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {(selected as string[]).map((value) => (
-                  <Chip
-                    key={value}
-                    label={artists.find((a) => a.id === value)?.name}
-                    avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
-                  />
+                  <ThemeProvider theme={chipTheme} key={value}>
+                    <Chip
+                      label={artists.find((a) => a.id === value)?.name}
+                      avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
+                    />
+                  </ThemeProvider>
                 ))}
               </div>
             )}
