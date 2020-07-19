@@ -114,7 +114,9 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
                 (track: SpotifyApi.TrackObjectSimplified) => track.uri
               );
 
-              this.props.spotifyWebApi.addTracksToPlaylist(playlist.body.id, tracks);
+              this.props.spotifyWebApi.addTracksToPlaylist(playlist.body.id, tracks).then(() => {
+                this.props.history.push(`/playlists/${playlist.body.id}`);
+              });
             });
         } else {
           this.props.openSnackBar({
