@@ -12,9 +12,9 @@ import {
   Avatar,
   FormHelperText,
   FormControl,
+  TextField,
 } from '@material-ui/core';
 
-import { Finalize } from './subcomponents';
 import { capitalizeFirstLetter } from 'common/helpers';
 import { Response, IAudioFeatures } from 'common/interfaces';
 import { TCreatePlaylistProps, ICreatePlaylistState } from './interfaces';
@@ -48,19 +48,18 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
           max: 1.0,
         },
       },
-      results: null,
       selectedArtistsIds: [],
-      finalizeView: false,
+      playlistName: '',
     };
   }
 
-  public componentDidMount(): void {
+  public componentDidMount = (): void => {
     let { fetchTopArtists, spotifyWebApi } = this.props;
 
     fetchTopArtists(spotifyWebApi, 'short_term');
     fetchTopArtists(spotifyWebApi, 'medium_term');
     fetchTopArtists(spotifyWebApi, 'long_term');
-  }
+  };
 
   public valueLabelFormat = (value: number, _: number): string => {
     return Math.round(value * 100).toString();
@@ -73,6 +72,18 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
 
       this.setState(state);
     };
+  };
+
+  public handlePlaylistNameChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    this.setState({
+      playlistName: event.target.value,
+    });
+  };
+
+  public handleArtistSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
+    this.setState({
+      selectedArtistsIds: (event.target.value as unknown) as string[],
+    });
   };
 
   public handleCreatePlaylistClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -96,7 +107,15 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
       })
       .then((response: Response<SpotifyApi.RecommendationsFromSeedsResponse>) => {
         if (response.body.tracks.length > 0) {
-          this.setState({ results: response.body, finalizeView: true });
+          this.props.spotifyWebApi
+            .createPlaylist(this.props.user.id, this.state.playlistName)
+            .then((playlist: Response<SpotifyApi.CreatePlaylistResponse>) => {
+              let tracks: ReadonlyArray<string> = response.body.tracks.map(
+                (track: SpotifyApi.TrackObjectSimplified) => track.uri
+              );
+
+              this.props.spotifyWebApi.addTracksToPlaylist(playlist.body.id, tracks);
+            });
         } else {
           this.props.openSnackBar({
             open: true,
@@ -106,7 +125,16 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
       });
   };
 
-  public renderAttributeSlider(attribute: keyof IAudioFeatures) {
+  public renderPlaylistNameInput = (): JSX.Element => {
+    return (
+      <>
+        <Typography>Playlist name</Typography>
+        <TextField value={this.state.playlistName} onChange={this.handlePlaylistNameChange} />
+      </>
+    );
+  };
+
+  public renderAttributeSlider = (attribute: keyof IAudioFeatures): JSX.Element => {
     return (
       <>
         <Typography>{capitalizeFirstLetter(attribute as string)}</Typography>
@@ -128,12 +156,6 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
         </ThemeProvider>
       </>
     );
-  }
-
-  public handleArtistSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
-    this.setState({
-      selectedArtistsIds: (event.target.value as unknown) as string[],
-    });
   };
 
   public renderArtistSelect = (artists: SpotifyApi.ArtistObjectFull[]): JSX.Element => {
@@ -182,8 +204,8 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
     );
   };
 
-  public render(): JSX.Element {
-    let { selectedArtistsIds, finalizeView } = this.state;
+  public render = (): JSX.Element => {
+    let { selectedArtistsIds, playlistName } = this.state;
 
     let attributes: (keyof IAudioFeatures)[] = [
       'acousticness',
@@ -205,14 +227,14 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
       artists = artists.filter((e, i) => artists.findIndex((a) => a.id === e.id) === i);
     }
 
-    if (finalizeView) {
-      return <Finalize history={this.props.history} api={this.props.spotifyWebApi} results={this.state.results!} />;
-    }
-
     return (
       <Grid container spacing={3} alignItems={'center'}>
         <Grid item xs={12}>
           <Typography variant={'h6'}>Create a playlist</Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+          {this.renderPlaylistNameInput()}
         </Grid>
 
         <Grid item xs={12}>
@@ -237,7 +259,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
                 color={'primary'}
                 size={'medium'}
                 onClick={this.handleCreatePlaylistClick}
-                disabled={selectedArtistsIds.length === 0 || selectedArtistsIds.length > 3}
+                disabled={selectedArtistsIds.length === 0 || selectedArtistsIds.length > 3 || playlistName === ''}
               >
                 Create
               </Button>
@@ -246,7 +268,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
         </Grid>
       </Grid>
     );
-  }
+  };
 }
 
 export default CreatePlaylist;

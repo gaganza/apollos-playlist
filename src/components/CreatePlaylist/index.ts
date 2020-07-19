@@ -26,6 +26,7 @@ const mapDispatchToProps = (
 const mapStateToProps = (state: IRootState): IStateProps => {
   return {
     spotifyWebApi: state.spotifyWebApi,
+    user: state.user!,
     tracksAttributes: state.tracksAttributes,
     topArtists: state.topArtists,
   };

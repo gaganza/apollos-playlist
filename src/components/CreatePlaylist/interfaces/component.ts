@@ -16,9 +16,8 @@ export interface IRecommendedQuery {
 }
 export interface ICreatePlaylistState {
   query: IRecommendedQuery;
-  results: SpotifyApi.RecommendationsFromSeedsResponse | null;
   selectedArtistsIds: string[];
-  finalizeView: boolean;
+  playlistName: string;
 }
 
 export interface IDispatchProps {
@@ -28,6 +27,7 @@ export interface IDispatchProps {
 
 export interface IStateProps {
   spotifyWebApi: SpotifyWebApi;
+  user: SpotifyApi.UserProfileResponse;
   tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse | null;
   topArtists: ITopArtistsReducer | null;
 }
