@@ -6,8 +6,6 @@ import { PlaylistCard } from './subcomponents';
 import { PLAYLIST_RESULTS_PER_PAGE } from 'common/constants';
 import { TPlaylistsProps, IPlaylistsState } from './interfaces';
 
-import './styles.scss';
-
 class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
   public constructor(props: TPlaylistsProps) {
     super(props);
