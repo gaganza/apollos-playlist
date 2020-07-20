@@ -23,6 +23,7 @@ export interface ICreatePlaylistState {
 export interface IDispatchProps {
   fetchTopArtists: (api: SpotifyWebApi, timeRange: 'long_term' | 'medium_term' | 'short_term') => Promise<void>;
   openSnackBar: (data: Partial<SnackbarProps>) => void;
+  clearPlaylist: () => void;
 }
 
 export interface IStateProps {

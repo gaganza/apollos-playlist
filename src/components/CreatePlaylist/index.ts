@@ -6,6 +6,7 @@ import { SnackbarProps } from '@material-ui/core';
 
 import CreatePlaylist from './CreatePlaylist';
 import { fetchTopArtists, openSnackbar } from 'common/actions';
+import { clearPlaylist } from 'components/Playlists/actions';
 import { IRootState, IAction } from 'common/interfaces';
 import { IStateProps, IDispatchProps } from './interfaces';
 
@@ -13,13 +14,14 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<
     IRootState,
     null,
-    IAction<SpotifyApi.UsersTopArtistsResponse> | IAction<Partial<SnackbarProps>>
+    IAction<SpotifyApi.UsersTopArtistsResponse> | IAction<Partial<SnackbarProps>> | IAction<unknown>
   >
 ): IDispatchProps => {
   return {
     fetchTopArtists: (api: SpotifyWebApi, timeRange: 'long_term' | 'medium_term' | 'short_term') =>
       dispatch(fetchTopArtists(api, timeRange)),
     openSnackBar: (data: Partial<SnackbarProps>) => dispatch(openSnackbar(data)),
+    clearPlaylist: () => dispatch(clearPlaylist()),
   };
 };
 

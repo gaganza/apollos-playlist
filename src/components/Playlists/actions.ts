@@ -7,12 +7,17 @@ import { IAction, Response, IPagingObject, IRootState, IPaginationOptions } from
 
 export enum PLAYLISTS {
   RECEIVE_PLAYLISTS = 'playlists/RECEIVE_PLAYLISTS',
+  CLEAR = 'playlist/CLEAR',
 }
 
 export const receivePlaylist = (
   data: IPagingObject<SpotifyApi.PlaylistObjectSimplified>
 ): IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>> => {
   return { type: PLAYLISTS.RECEIVE_PLAYLISTS, data };
+};
+
+export const clearPlaylist = (): IAction<unknown> => {
+  return { type: PLAYLISTS.CLEAR, data: undefined };
 };
 
 export const fetchPlaylists = (
