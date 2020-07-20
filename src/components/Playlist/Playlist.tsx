@@ -1,29 +1,21 @@
 import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
-import {
-  Button,
-  Table,
-  TableContainer,
-  TableRow,
-  TableCell,
-  TableBody,
-  Typography,
-  LinearProgress,
-} from '@material-ui/core';
+import { Table, TableContainer, TableRow, TableCell, TableBody, Typography, LinearProgress } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import { capitalizeFirstLetter, millisecondsToViewableFormat } from 'common/helpers';
 import { playlistToTrackIds, normalizeTrackAudioFeature } from './helpers';
 import { IAudioFeatures } from 'common/interfaces';
-import { TPlaylistProps } from './interfaces';
+import { TPlaylistProps, IPlaylistState } from './interfaces';
 
-import { tableTheme } from 'common/themes';
-import { linearProgresTheme } from './themes';
+import { tableTheme, linearProgresTheme } from 'common/themes';
 
-class Playlist extends React.PureComponent<TPlaylistProps> {
+class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
   public constructor(props: TPlaylistProps) {
     super(props);
+
+    this.state = { loading: true };
   }
 
   public componentDidMount(): void {
@@ -40,6 +32,8 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
         fetchTracksAttributes(spotifyWebApi, playlistToTrackIds(playlist));
       });
     }
+
+    this.setState({ loading: false });
   }
 
   public renderPlaylistArtwork(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
@@ -133,6 +127,7 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
 
   public render(): JSX.Element | null {
     let { location, playlist, tracksAttributes } = this.props;
+    let { loading } = this.state;
 
     let playlistId: string = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
@@ -141,6 +136,14 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
 
     return (
       <Grid container spacing={3}>
+        {loading && (
+          <Grid item xs={12}>
+            <ThemeProvider theme={linearProgresTheme}>
+              <LinearProgress />
+            </ThemeProvider>
+          </Grid>
+        )}
+
         <Grid item xs={12} md={6}>
           {this.renderPlaylistArtwork(playlist)}
         </Grid>

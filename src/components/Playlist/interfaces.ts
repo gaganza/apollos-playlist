@@ -3,6 +3,9 @@ import SpotifyWebApi from 'spotify-web-api-node';
 
 export interface IPlaylistProps {}
 
+export interface IPlaylistState {
+  loading: boolean;
+}
 export interface IDispatchProps {
   fetchPlaylist: (api: SpotifyWebApi, playlistId: string) => Promise<void>;
   fetchTracksAttributes: (api: SpotifyWebApi, trackIds: string[]) => Promise<void>;
