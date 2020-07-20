@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/apollos-playlist/static/css/main.8145b925.chunk.css",
-    "main.js": "/apollos-playlist/static/js/main.838b1f04.chunk.js",
-    "main.js.map": "/apollos-playlist/static/js/main.838b1f04.chunk.js.map",
+    "main.js": "/apollos-playlist/static/js/main.e0593c4f.chunk.js",
+    "main.js.map": "/apollos-playlist/static/js/main.e0593c4f.chunk.js.map",
     "runtime-main.js": "/apollos-playlist/static/js/runtime-main.6857d4ca.js",
     "runtime-main.js.map": "/apollos-playlist/static/js/runtime-main.6857d4ca.js.map",
     "static/js/2.d09f37a5.chunk.js": "/apollos-playlist/static/js/2.d09f37a5.chunk.js",
     "static/js/2.d09f37a5.chunk.js.map": "/apollos-playlist/static/js/2.d09f37a5.chunk.js.map",
     "index.html": "/apollos-playlist/index.html",
-    "precache-manifest.b4dc475627be611ebdf97b59bbd031ca.js": "/apollos-playlist/precache-manifest.b4dc475627be611ebdf97b59bbd031ca.js",
+    "precache-manifest.b6d94ddca309d18121415f739a781068.js": "/apollos-playlist/precache-manifest.b6d94ddca309d18121415f739a781068.js",
     "service-worker.js": "/apollos-playlist/service-worker.js",
     "static/css/main.8145b925.chunk.css.map": "/apollos-playlist/static/css/main.8145b925.chunk.css.map",
     "static/js/2.d09f37a5.chunk.js.LICENSE.txt": "/apollos-playlist/static/js/2.d09f37a5.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.6857d4ca.js",
     "static/js/2.d09f37a5.chunk.js",
     "static/css/main.8145b925.chunk.css",
-    "static/js/main.838b1f04.chunk.js"
+    "static/js/main.e0593c4f.chunk.js"
   ]
 }
