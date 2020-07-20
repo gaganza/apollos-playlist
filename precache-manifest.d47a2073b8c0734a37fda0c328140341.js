@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aa17dec4d1665966149eaf54e453b7c7",
+    "revision": "90854979572c28cd4f6d0b576d78dd96",
     "url": "/apollos-playlist/index.html"
   },
   {
-    "revision": "2a5df949cadfdd9a1435",
+    "revision": "12252f71f0c8cc9f3664",
     "url": "/apollos-playlist/static/css/main.8145b925.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/apollos-playlist/static/js/2.017ababc.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2a5df949cadfdd9a1435",
-    "url": "/apollos-playlist/static/js/main.88aa8079.chunk.js"
+    "revision": "12252f71f0c8cc9f3664",
+    "url": "/apollos-playlist/static/js/main.a394017a.chunk.js"
   },
   {
     "revision": "d739688d3e1893a98d2e",
