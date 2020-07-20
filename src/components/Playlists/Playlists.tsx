@@ -1,10 +1,12 @@
 import * as React from 'react';
-import Grid from '@material-ui/core/Grid';
+import { LinearProgress, ThemeProvider, Grid } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 
 import { PlaylistCard } from './subcomponents';
 import { PLAYLIST_RESULTS_PER_PAGE } from 'common/constants';
 import { TPlaylistsProps, IPlaylistsState } from './interfaces';
+
+import { linearProgresTheme } from 'common/themes';
 
 class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
   public constructor(props: TPlaylistsProps) {
@@ -12,6 +14,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
 
     this.state = {
       page: 1,
+      loading: true,
     };
   }
 
@@ -27,6 +30,8 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
         });
       }
     }
+
+    this.setState({ loading: false });
   }
 
   public handlePaginationChange = (_: React.ChangeEvent<unknown>, page: number) => {
@@ -40,40 +45,47 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
     this.setState({ page });
   };
 
-  public render(): JSX.Element | null {
+  public render(): JSX.Element {
     let { playlists } = this.props;
-    let { page } = this.state;
+    let { page, loading } = this.state;
 
-    if (playlists && playlists.items) {
-      return (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Grid container spacing={3}>
-            {playlists.items[page] &&
-              playlists.items[page].map((playlist: SpotifyApi.PlaylistObjectSimplified) => {
-                return (
-                  <Grid item xs={12} md={6} lg={4} xl={3} key={`playlist-card-${playlist.id}`}>
-                    <PlaylistCard {...playlist} />
-                  </Grid>
-                );
-              })}
-          </Grid>
-          <br />
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Grid container spacing={3}>
+          {loading && (
+            <Grid item xs={12}>
+              <ThemeProvider theme={linearProgresTheme}>
+                <LinearProgress />
+              </ThemeProvider>
+            </Grid>
+          )}
+
+          {playlists &&
+            playlists.items[page] &&
+            playlists.items[page].map((playlist: SpotifyApi.PlaylistObjectSimplified) => {
+              return (
+                <Grid item xs={12} md={6} lg={4} xl={3} key={`playlist-card-${playlist.id}`}>
+                  <PlaylistCard {...playlist} />
+                </Grid>
+              );
+            })}
+        </Grid>
+        <br />
+        {playlists && playlists.items && (
           <Pagination
             count={Math.floor(playlists.total / PLAYLIST_RESULTS_PER_PAGE)}
             page={page}
             onChange={this.handlePaginationChange}
           />
-        </div>
-      );
-    }
-
-    return null;
+        )}
+      </div>
+    );
   }
 }
 

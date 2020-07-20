@@ -3,3 +3,4 @@ export * from './slider';
 export * from './input';
 export * from './chip';
 export * from './table';
+export * from './linearProgressTheme';

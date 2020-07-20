@@ -7,6 +7,7 @@ export interface IPlaylistsProps {}
 
 export interface IPlaylistsState {
   page: number;
+  loading: boolean;
 }
 
 export interface IDispatchProps {
