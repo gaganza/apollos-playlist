@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/gaganza/apollos-playlist/static/css/main.8145b925.chunk.css",
+    "main.js": "/gaganza/apollos-playlist/static/js/main.7fd899b7.chunk.js",
+    "main.js.map": "/gaganza/apollos-playlist/static/js/main.7fd899b7.chunk.js.map",
+    "runtime-main.js": "/gaganza/apollos-playlist/static/js/runtime-main.f96dc1ff.js",
+    "runtime-main.js.map": "/gaganza/apollos-playlist/static/js/runtime-main.f96dc1ff.js.map",
+    "static/js/2.28c424cd.chunk.js": "/gaganza/apollos-playlist/static/js/2.28c424cd.chunk.js",
+    "static/js/2.28c424cd.chunk.js.map": "/gaganza/apollos-playlist/static/js/2.28c424cd.chunk.js.map",
+    "index.html": "/gaganza/apollos-playlist/index.html",
+    "precache-manifest.6cb0510fada30fee06bf334febb36a1d.js": "/gaganza/apollos-playlist/precache-manifest.6cb0510fada30fee06bf334febb36a1d.js",
+    "service-worker.js": "/gaganza/apollos-playlist/service-worker.js",
+    "static/css/main.8145b925.chunk.css.map": "/gaganza/apollos-playlist/static/css/main.8145b925.chunk.css.map",
+    "static/js/2.28c424cd.chunk.js.LICENSE.txt": "/gaganza/apollos-playlist/static/js/2.28c424cd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f96dc1ff.js",
+    "static/js/2.28c424cd.chunk.js",
+    "static/css/main.8145b925.chunk.css",
+    "static/js/main.7fd899b7.chunk.js"
+  ]
+}
