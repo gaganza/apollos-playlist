@@ -90,14 +90,14 @@ export default function ResponsiveDrawer(props: any) {
         <h1 style={{ color: 'white', padding: '8px 16px' }}>Apollo's Playlist</h1>
         <Divider />
         <List>
-          <Link to={'/playlists'} style={{ textDecoration: 'none' }} onClick={handleDrawerToggle}>
+          <Link to={'/playlists'} style={{ textDecoration: 'none' }}>
             <ListItem button key={'Playlists'}>
               <MusicNote style={{ color: 'white' }} />
               <ListItemText primary={'Playlists'} style={{ color: 'white' }} />
             </ListItem>
           </Link>
 
-          <Link to={'/create-playlist'} style={{ textDecoration: 'none' }} onClick={handleDrawerToggle}>
+          <Link to={'/create-playlist'} style={{ textDecoration: 'none' }}>
             <ListItem button key={'Create a Playlists'}>
               <MusicNote style={{ color: 'white' }} />
               <ListItemText primary={'Create a Playlists'} style={{ color: 'white' }} />
