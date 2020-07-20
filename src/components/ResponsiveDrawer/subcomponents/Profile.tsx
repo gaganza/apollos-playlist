@@ -1,10 +1,18 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { MapStateToPropsParam, connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Divider, Avatar } from '@material-ui/core';
 
 import { IRootState } from 'common/interfaces';
-import { TProfileProps, IStateProps, IProfileProps } from './interfaces';
+
+export interface IProfileProps {}
+
+export interface IStateProps {
+  user: SpotifyApi.CurrentUsersProfileResponse | null;
+}
+
+export type TProfileProps = IProfileProps & IStateProps & RouteComponentProps;
 
 class Profile extends React.PureComponent<TProfileProps> {
   public render(): JSX.Element | null {

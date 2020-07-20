@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 
 import Profile from './subcomponents/Profile';
+import SignOut from './subcomponents/SignOut';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -107,6 +108,10 @@ export default function ResponsiveDrawer(props: any) {
       </div>
       <div>
         <Profile />
+        <Divider />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <SignOut />
+        </div>
       </div>
     </div>
   );
