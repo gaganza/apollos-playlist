@@ -39,11 +39,7 @@ class App extends React.PureComponent<TAppProps> {
     if (!isLoggedIn) {
       return (
         <div className="apollos-playlist-container">
-          <Snackbar {...snackbar} onClose={closeSnackbar} />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <SignIn />
-          </Switch>
+          <HomePage />
         </div>
       );
     }
