@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/apollos-playlist/static/css/main.8145b925.chunk.css",
-    "main.js": "/apollos-playlist/static/js/main.9d41ac0a.chunk.js",
-    "main.js.map": "/apollos-playlist/static/js/main.9d41ac0a.chunk.js.map",
+    "main.js": "/apollos-playlist/static/js/main.e0593c4f.chunk.js",
+    "main.js.map": "/apollos-playlist/static/js/main.e0593c4f.chunk.js.map",
     "runtime-main.js": "/apollos-playlist/static/js/runtime-main.6857d4ca.js",
     "runtime-main.js.map": "/apollos-playlist/static/js/runtime-main.6857d4ca.js.map",
-    "static/js/2.017ababc.chunk.js": "/apollos-playlist/static/js/2.017ababc.chunk.js",
-    "static/js/2.017ababc.chunk.js.map": "/apollos-playlist/static/js/2.017ababc.chunk.js.map",
+    "static/js/2.d09f37a5.chunk.js": "/apollos-playlist/static/js/2.d09f37a5.chunk.js",
+    "static/js/2.d09f37a5.chunk.js.map": "/apollos-playlist/static/js/2.d09f37a5.chunk.js.map",
     "index.html": "/apollos-playlist/index.html",
-    "precache-manifest.bf32f8a845abf750be794d1bbbd02a7b.js": "/apollos-playlist/precache-manifest.bf32f8a845abf750be794d1bbbd02a7b.js",
+    "precache-manifest.b6d94ddca309d18121415f739a781068.js": "/apollos-playlist/precache-manifest.b6d94ddca309d18121415f739a781068.js",
     "service-worker.js": "/apollos-playlist/service-worker.js",
     "static/css/main.8145b925.chunk.css.map": "/apollos-playlist/static/css/main.8145b925.chunk.css.map",
-    "static/js/2.017ababc.chunk.js.LICENSE.txt": "/apollos-playlist/static/js/2.017ababc.chunk.js.LICENSE.txt"
+    "static/js/2.d09f37a5.chunk.js.LICENSE.txt": "/apollos-playlist/static/js/2.d09f37a5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6857d4ca.js",
-    "static/js/2.017ababc.chunk.js",
+    "static/js/2.d09f37a5.chunk.js",
     "static/css/main.8145b925.chunk.css",
-    "static/js/main.9d41ac0a.chunk.js"
+    "static/js/main.e0593c4f.chunk.js"
   ]
 }
