@@ -11,6 +11,9 @@ export const playlistsReducer = (
     case PLAYLISTS.RECEIVE_PLAYLISTS:
       return merge({}, state, action.data);
 
+    case PLAYLISTS.CLEAR:
+      return null;
+
     default:
       return state;
   }

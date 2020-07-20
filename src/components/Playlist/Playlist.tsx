@@ -1,13 +1,16 @@
 import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
-import TableContainer from '@material-ui/core/TableContainer';
-import Table from '@material-ui/core/Table';
-import TableRow from '@material-ui/core/TableRow/TableRow';
-import TableCell from '@material-ui/core/TableCell/TableCell';
-import TableBody from '@material-ui/core/TableBody/TableBody';
-import Typography from '@material-ui/core/Typography';
+import {
+  Button,
+  Table,
+  TableContainer,
+  TableRow,
+  TableCell,
+  TableBody,
+  Typography,
+  LinearProgress,
+} from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import LinearProgress from '@material-ui/core/LinearProgress/LinearProgress';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import { capitalizeFirstLetter, millisecondsToViewableFormat } from 'common/helpers';
@@ -138,10 +141,10 @@ class Playlist extends React.PureComponent<TPlaylistProps> {
 
     return (
       <Grid container spacing={3}>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6}>
           {this.renderPlaylistArtwork(playlist)}
         </Grid>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={6}>
           {this.renderPlaylistName(playlist)}
           <br />
           {this.renderPlaylistOwner(playlist)}
