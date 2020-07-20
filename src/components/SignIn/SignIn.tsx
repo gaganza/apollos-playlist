@@ -8,6 +8,8 @@ import { redirectUri, clientId, scopes } from 'authorization';
 import { IAuthorizationResponse, IAuthorizationErrorResponse } from 'common/interfaces';
 import { TSignInProps } from './interfaces';
 
+import './style.scss';
+
 class SignIn extends React.PureComponent<TSignInProps> {
   public onSuccessHandler: (data: IAuthorizationResponse) => void = async (data: IAuthorizationResponse) => {
     let { setGlobalSpotifyClient, history, fetchUser } = this.props;
@@ -28,7 +30,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
 
   public render(): JSX.Element {
     return (
-      <div>
+      <div className={'sign-in-button-container'}>
         <SpotifyLogin
           redirectUri={redirectUri}
           clientId={clientId}
