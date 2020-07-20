@@ -1,5 +1,6 @@
 {
   "name": "apollos-playlist",
+  "homepage": "https://github.com/gaganza/apollos-playlist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
