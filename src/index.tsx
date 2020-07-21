@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <App />
       </HashRouter>
     </Provider>,
