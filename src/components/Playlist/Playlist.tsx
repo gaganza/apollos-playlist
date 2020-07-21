@@ -19,7 +19,7 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
   }
 
   public componentDidMount(): void {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     let { location, spotifyWebApi, fetchPlaylist, fetchTracksAttributes } = this.props;
 
     let playlistId: string = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);

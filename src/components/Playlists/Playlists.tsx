@@ -42,6 +42,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
         offset: (page - 1) * PLAYLIST_RESULTS_PER_PAGE,
       });
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.setState({ page });
   };
 
