@@ -11,8 +11,8 @@ import { IRootState } from 'common/interfaces';
 
 const defaultState: IRootState = {
   spotifyWebApi: new SpotifyWebApi({
-    clientId,
-    redirectUri,
+    clientId: clientId,
+    redirectUri: redirectUri,
   }),
   user: null,
   playlist: null,
@@ -23,7 +23,11 @@ const defaultState: IRootState = {
 };
 
 const configureStore = (preloadedState: IRootState = defaultState): Store<IRootState> => {
-  return createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(thunk)));
+  return createStore(
+    rootReducer,
+    preloadedState,
+    process.env.NODE_ENV === 'development' ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk)
+  );
 };
 
 export default configureStore;

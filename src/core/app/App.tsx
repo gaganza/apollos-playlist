@@ -5,7 +5,6 @@ import { Snackbar } from '@material-ui/core';
 
 import HomePage from 'components/HomePage';
 import NotFound from 'components/NotFound';
-import SignIn from 'components/SignIn';
 import Playlist from 'components/Playlist';
 import Playlists from 'components/Playlists';
 import CreatePlaylist from 'components/CreatePlaylist';
@@ -49,9 +48,9 @@ class App extends React.PureComponent<TAppProps> {
         <ResponsiveDrawer>
           <Snackbar {...snackbar} onClose={closeSnackbar} />
           <Switch>
-            <Route path="/playlists/:playlistId" component={Playlist} />
-            <Route exact path="/playlists" component={Playlists} />
-            <Route exact path="/create-playlist" component={CreatePlaylist} />
+            <Route exact path={['/', '/playlists']} component={Playlists} />
+            <Route path={'/playlists/:playlistId'} component={Playlist} />
+            <Route exact path={'/create-playlist'} component={CreatePlaylist} />
             <Route path="*" component={NotFound} />
           </Switch>
         </ResponsiveDrawer>
