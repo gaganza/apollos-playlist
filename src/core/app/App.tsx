@@ -43,6 +43,9 @@ class App extends React.PureComponent<TAppProps> {
       );
     }
 
+    console.log(process.env.NODE_ENV);
+    console.log(process.env.PUBLIC_URL);
+
     return (
       <div className="apollos-playlist-container">
         <ResponsiveDrawer>
