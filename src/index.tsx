@@ -1,8 +1,8 @@
 import React from 'react';
-import { Store } from 'redux';
 import ReactDOM from 'react-dom';
+import { Store } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import App from 'core/app';
 import configureStore from 'redux/store';
@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>,
     root
   );

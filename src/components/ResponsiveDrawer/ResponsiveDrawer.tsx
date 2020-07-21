@@ -98,9 +98,9 @@ export default function ResponsiveDrawer(props: any) {
           </Link>
 
           <Link to={'/create-playlist'} style={{ textDecoration: 'none' }}>
-            <ListItem button key={'Create a Playlists'}>
+            <ListItem button key={'Create a Playlist'}>
               <MusicNote style={{ color: 'white' }} />
-              <ListItemText primary={'Create a Playlists'} style={{ color: 'white' }} />
+              <ListItemText primary={'Create a Playlist'} style={{ color: 'white' }} />
             </ListItem>
           </Link>
         </List>
