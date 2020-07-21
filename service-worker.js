@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/apollos-playlist/precache-manifest.b2e90d44cf9fcdf495c50641675c25ed.js"
+  "/apollos-playlist/precache-manifest.3450efeae2913c61d0053c85c850c428.js"
 );
 
 self.addEventListener('message', (event) => {
