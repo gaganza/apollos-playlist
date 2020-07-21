@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Button, ThemeProvider, Typography } from '@material-ui/core';
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 import { setGlobalSpotifyClient } from 'common/actions';
@@ -27,9 +27,8 @@ class SignOut extends React.PureComponent<TSignOutProps> {
   public onClickHandler = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     let { setGlobalSpotifyClient, history } = this.props;
 
-    const cookie = new Cookies();
-    cookie.remove('spotify-bearer', { path: '/' });
-    setGlobalSpotifyClient(cookie.get('spotify-bearer'));
+    Cookies.remove('spotify-bearer', { path: '/' });
+    setGlobalSpotifyClient('');
     history.push('/');
   };
 

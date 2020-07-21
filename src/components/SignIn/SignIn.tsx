@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SpotifyLogin from 'react-spotify-login';
 import camelize from 'camelize';
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie';
 
 import { redirectUri, clientId, scopes } from 'authorization';
 
@@ -13,12 +13,11 @@ import './style.scss';
 class SignIn extends React.PureComponent<TSignInProps> {
   public onSuccessHandler: (data: IAuthorizationResponse) => void = async (data: IAuthorizationResponse) => {
     let { setGlobalSpotifyClient, history, fetchUser } = this.props;
-    const cookie = new Cookies();
-    cookie.set('spotify-bearer', camelize(data).accessToken, {
+    Cookies.set('spotify-bearer', camelize(data).accessToken, {
       path: '/',
     });
 
-    setGlobalSpotifyClient(cookie.get('spotify-bearer'));
+    setGlobalSpotifyClient(camelize(data).accessToken);
     await fetchUser(this.props.spotifyWebApi).then((_: void) => {
       history.push('/playlists');
     });

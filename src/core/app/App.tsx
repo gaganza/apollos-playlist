@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Cookies from 'universal-cookie';
+import Cookies from 'js-cookie';
 import { Snackbar } from '@material-ui/core';
 
 import HomePage from 'components/HomePage';
@@ -17,8 +17,9 @@ import './styles.scss';
 class App extends React.PureComponent<TAppProps> {
   public async componentDidMount() {
     let { setGlobalSpotifyClient, fetchUser, history } = this.props;
-    const cookie = new Cookies();
-    setGlobalSpotifyClient(cookie.get('spotify-bearer'));
+    if (Cookies.get('spotify-bearer')) {
+      setGlobalSpotifyClient(Cookies.get('spotify-bearer')!);
+    }
 
     let { spotifyWebApi } = this.props;
 
