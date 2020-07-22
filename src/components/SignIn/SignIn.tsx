@@ -14,7 +14,9 @@ class SignIn extends React.PureComponent<TSignInProps> {
   public onSuccessHandler: (data: IAuthorizationResponse) => void = async (data: IAuthorizationResponse) => {
     let { setGlobalSpotifyClient, history, fetchUser } = this.props;
     Cookies.set('spotify-bearer', camelize(data).accessToken, {
-      path: '/',
+      path: '/auth',
+      sameSite: 'lax',
+      secure: true,
     });
 
     setGlobalSpotifyClient(camelize(data).accessToken);
