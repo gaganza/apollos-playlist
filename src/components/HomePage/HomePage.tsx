@@ -1,27 +1,12 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import SignIn from 'components/SignIn';
 
 import './styles.scss';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center" style={{ color: 'white' }}>
-      {'Copyright © '}
-      <Link color="inherit" href="https:/apollosplaylist.com/">
-        Apollo's Playlist
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,9 +54,6 @@ export default function SignInSide() {
             Apollo's Playlist
           </Typography>
           <SignIn />
-          <Box mt={5}>
-            <Copyright />
-          </Box>
         </div>
       </Grid>
     </Grid>
