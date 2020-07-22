@@ -6,6 +6,9 @@ export const scopes: string[] = [
   'user-top-read',
   'playlist-read-private',
   'playlist-modify-private',
+  'user-follow-read',
+  'user-read-recently-played',
+  'user-library-read',
 ];
 
 export const responseType: string = 'token';
