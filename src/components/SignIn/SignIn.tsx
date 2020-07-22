@@ -38,7 +38,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
     let params: URLSearchParams = new URLSearchParams({
       client_id: clientId,
       redirect_uri: redirectUri,
-      scopes: scopes.join('%20'),
+      scope: scopes.join('%20'),
       response_type: responseType,
     });
 
