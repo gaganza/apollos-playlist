@@ -33,8 +33,8 @@ class App extends React.PureComponent<TAppProps> {
   }
 
   public render(): JSX.Element {
-    let { closeSnackbar, snackbar } = this.props;
-    let isLoggedIn: boolean = this.props.spotifyWebApi.getAccessToken() !== undefined;
+    let { closeSnackbar, snackbar, spotifyWebApi } = this.props;
+    let isLoggedIn: boolean = spotifyWebApi.getAccessToken() !== undefined && spotifyWebApi.getAccessToken() !== '';
 
     if (!isLoggedIn) {
       return (
