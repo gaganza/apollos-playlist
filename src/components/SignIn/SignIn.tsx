@@ -15,10 +15,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
     console.log(process.env.PUBLIC_URL);
 
     if (pathname.indexOf('access_token') !== -1) {
-      let token: string = pathname.substring(
-        pathname.indexOf('access_token') + 'access_token'.length + 1,
-        pathname.indexOf('&')
-      );
+      let token: string = pathname.substring(pathname.indexOf('=') + 1, pathname.indexOf('&'));
 
       let { setGlobalSpotifyClient, history, fetchUser } = this.props;
 
