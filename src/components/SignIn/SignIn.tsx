@@ -11,7 +11,7 @@ import { TSignInProps } from './interfaces';
 import './style.scss';
 
 class SignIn extends React.PureComponent<TSignInProps> {
-  public onSuccessHandler: (data: IAuthorizationResponse) => void = async (data: IAuthorizationResponse) => {
+  public onSuccessHandler = async (data: IAuthorizationResponse): Promise<void> => {
     let { setGlobalSpotifyClient, history, fetchUser } = this.props;
     Cookies.set('spotify-bearer', camelize(data).accessToken, {
       path: '/auth',
@@ -25,7 +25,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
     });
   };
 
-  public onErrorHandler: (data: IAuthorizationErrorResponse) => void = (data: IAuthorizationErrorResponse) => {
+  public onErrorHandler = (data: IAuthorizationErrorResponse): void => {
     console.log(data.name, data.message);
   };
 
