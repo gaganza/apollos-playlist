@@ -1,5 +1,14 @@
-export const scopes: string =
-  'playlist-read-collaborative playlist-modify-public user-top-read playlist-read-private playlist-modify-private';
+export const authEndpoint: string = 'https://accounts.spotify.com/authorize?';
+
+export const scopes: string[] = [
+  'playlist-read-collaborative',
+  'playlist-modify-public',
+  'user-top-read',
+  'playlist-read-private',
+  'playlist-modify-private',
+];
+
+export const responseType: string = 'token';
 
 export const clientSecret: string =
   process.env.NODE_ENV === 'development' ? 'fc20b72c74f74a1c8fd2b30269efe82c' : 'c96b4f7d709c49d6aa0f57f49aa4ab5b';
