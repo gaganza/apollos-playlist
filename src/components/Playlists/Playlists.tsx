@@ -77,12 +77,12 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
               );
             })}
         </Grid>
-        <br />
         {playlists && playlists.items && (
           <Pagination
             count={Math.floor(playlists.total / PLAYLIST_RESULTS_PER_PAGE)}
             page={page}
             onChange={this.handlePaginationChange}
+            style={{ paddingTop: '16px' }}
           />
         )}
       </div>
