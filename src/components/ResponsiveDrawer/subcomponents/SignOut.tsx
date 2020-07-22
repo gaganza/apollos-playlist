@@ -27,7 +27,7 @@ class SignOut extends React.PureComponent<TSignOutProps> {
   public onClickHandler = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     let { setGlobalSpotifyClient, history } = this.props;
 
-    Cookies.remove('spotify-bearer', { path: '/auth', sameSite: 'lax', secure: true });
+    Cookies.remove('spotify-bearer', { path: '/auth', sameSite: 'none', secure: true });
     setGlobalSpotifyClient('');
     history.push('/');
   };
