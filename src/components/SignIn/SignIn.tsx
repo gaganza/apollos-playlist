@@ -1,45 +1,48 @@
 import * as React from 'react';
-import SpotifyLogin from 'react-spotify-login';
-import camelize from 'camelize';
 import Cookies from 'js-cookie';
 
-import { redirectUri, clientId, scopes } from 'authorization';
-
-import { IAuthorizationResponse, IAuthorizationErrorResponse } from 'common/interfaces';
+import { redirectUri, clientId, scopes, authEndpoint, responseType } from 'authorization';
 import { TSignInProps } from './interfaces';
 
 import './style.scss';
 
 class SignIn extends React.PureComponent<TSignInProps> {
-  public onSuccessHandler = async (data: IAuthorizationResponse): Promise<void> => {
-    let { setGlobalSpotifyClient, history, fetchUser } = this.props;
-    Cookies.set('spotify-bearer', camelize(data).accessToken, {
-      path: '/auth',
-      sameSite: 'none',
-      secure: true,
-    });
+  public async componentDidMount(): Promise<void> {
+    let { history } = this.props;
+    let { location } = history;
+    let { pathname } = location;
 
-    setGlobalSpotifyClient(camelize(data).accessToken);
-    await fetchUser(this.props.spotifyWebApi).then((_: void) => {
-      history.push('/playlists');
-    });
-  };
+    if (pathname.indexOf('/access_token') !== -1) {
+      let token: string = pathname.substring('/access_token'.length + 1, pathname.indexOf('&'));
+      let { setGlobalSpotifyClient, history, fetchUser } = this.props;
 
-  public onErrorHandler = (data: IAuthorizationErrorResponse): void => {
-    console.log(data.name, data.message);
-  };
+      Cookies.set('spotify-bearer', token, {
+        path: '/auth',
+        sameSite: 'none',
+        secure: true,
+      });
+
+      setGlobalSpotifyClient(token);
+      await fetchUser(this.props.spotifyWebApi).then((_: void) => {
+        history.push('/playlists');
+      });
+    }
+  }
 
   public render(): JSX.Element {
+    let uri: string = `${authEndpoint}`;
+
+    let params: URLSearchParams = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      scopes: scopes.join('%20'),
+      response_type: responseType,
+    });
+
     return (
-      <div className={'sign-in-button-container'}>
-        <SpotifyLogin
-          redirectUri={redirectUri}
-          clientId={clientId}
-          scope={scopes}
-          onSuccess={this.onSuccessHandler}
-          onFailure={this.onErrorHandler}
-        />
-      </div>
+      <a className="sign-in-button" href={uri + params.toString()}>
+        Login to Spotify
+      </a>
     );
   }
 }

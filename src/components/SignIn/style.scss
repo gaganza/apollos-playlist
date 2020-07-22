@@ -1,11 +1,11 @@
-.sign-in-button-container {
-  > button {
-    background-color: #1db954;
-    font-size: 16px;
-    line-height: 1;
-    border-radius: 500px;
-    margin: 32px 0;
-    padding: 16px;
-    border: none;
-  }
+.sign-in-button {
+  background-color: #1db954;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 500px;
+  margin: 32px 0;
+  padding: 16px;
+  border: none;
+  text-decoration: none;
+  color: black;
 }
