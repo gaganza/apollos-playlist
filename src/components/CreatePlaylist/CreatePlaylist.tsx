@@ -66,7 +66,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   };
 
   public handleSliderChange = (attr: keyof IAudioFeatures) => {
-    return (_: React.ChangeEvent<{}>, newValue: number[]) => {
+    return (_: React.ChangeEvent<unknown>, newValue: number[]) => {
       let state: ICreatePlaylistState = this.state;
       state.query[attr] = { min: newValue[0], max: newValue[1] };
 
@@ -81,6 +81,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   };
 
   public handleArtistSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
+    // have to force cast this since string[] isn't inherently supported as a React.ChangeEvent value
     this.setState({
       selectedArtistsIds: (event.target.value as unknown) as string[],
     });
@@ -128,6 +129,12 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
       });
   };
 
+  public alphabetizeArtists = (artists: SpotifyApi.ArtistObjectFull[]): SpotifyApi.ArtistObjectFull[] => {
+    return artists.sort((a: SpotifyApi.ArtistObjectFull, b: SpotifyApi.ArtistObjectFull) =>
+      a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    );
+  };
+
   public renderPlaylistNameInput = (): JSX.Element => {
     return (
       <>
@@ -151,13 +158,24 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
             value={[this.state.query[attribute].min, this.state.query[attribute].max]}
             onChange={
               (this.handleSliderChange(attribute) as unknown) as (
-                event: React.ChangeEvent<{}>,
+                event: React.ChangeEvent<unknown>,
                 value: number | number[]
               ) => void
             }
           />
         </ThemeProvider>
       </>
+    );
+  };
+
+  public renderChip = (artists: SpotifyApi.ArtistObjectFull[], value: string): JSX.Element => {
+    return (
+      <ThemeProvider theme={chipTheme} key={value}>
+        <Chip
+          label={artists.find((a) => a.id === value)?.name}
+          avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
+        />
+      </ThemeProvider>
     );
   };
 
@@ -177,28 +195,17 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
               input={<Input multiline />}
               renderValue={(selected) => (
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {(selected as string[]).map((value) => (
-                    <ThemeProvider theme={chipTheme} key={value}>
-                      <Chip
-                        label={artists.find((a) => a.id === value)?.name}
-                        avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
-                      />
-                    </ThemeProvider>
-                  ))}
+                  {(selected as string[]).map((value: string) => this.renderChip(artists, value))}
                 </div>
               )}
             >
-              {artists
-                .sort((a: SpotifyApi.ArtistObjectFull, b: SpotifyApi.ArtistObjectFull) =>
-                  a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+              {this.alphabetizeArtists(artists).map(
+                (artist: SpotifyApi.ArtistObjectFull): JSX.Element => (
+                  <MenuItem key={artist.name} value={artist.id}>
+                    {artist.name}
+                  </MenuItem>
                 )
-                .map(
-                  (artist: SpotifyApi.ArtistObjectFull): JSX.Element => (
-                    <MenuItem key={artist.name} value={artist.id}>
-                      {artist.name}
-                    </MenuItem>
-                  )
-                )}
+              )}
             </Select>
             {selectedArtistsIds.length > 3 && <FormHelperText>Please select 1 - 3 artists</FormHelperText>}
           </FormControl>
