@@ -166,7 +166,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
 
     return (
       <>
-        <Typography>Suggested artists</Typography>
+        <Typography>Seed artists</Typography>
         <ThemeProvider theme={inputTheme}>
           <FormControl error>
             <Select
@@ -264,7 +264,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
                 onClick={this.handleCreatePlaylistClick}
                 disabled={selectedArtistsIds.length === 0 || selectedArtistsIds.length > 3 || playlistName === ''}
               >
-                Create
+                <Typography style={{ textTransform: 'none' }}>Create</Typography>
               </Button>
             </ThemeProvider>
           </Grid>

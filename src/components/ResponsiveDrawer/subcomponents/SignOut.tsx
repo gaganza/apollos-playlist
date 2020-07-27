@@ -30,7 +30,7 @@ class SignOut extends React.PureComponent<TSignOutProps> {
       <div>
         <ThemeProvider theme={buttonTheme}>
           <Button onClick={this.onClickHandler}>
-            <Typography style={{ color: 'white' }}>Sign out</Typography>
+            <Typography style={{ color: 'white', textTransform: 'none' }}>Sign out</Typography>
           </Button>
         </ThemeProvider>
       </div>
