@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 import SignIn from './SignIn';
-import { setGlobalSpotifyClient, fetchUser } from 'common/actions';
+import { fetchUser } from 'common/actions';
 import { IAction, IRootState } from 'common/interfaces';
 import { IStateProps, IDispatchProps } from './interfaces';
 
@@ -15,10 +15,9 @@ const mapStateToProps = (state: IRootState): IStateProps => {
 };
 
 const mapDispatchToProps = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<string> | IAction<SpotifyApi.CurrentUsersProfileResponse>>
+  dispatch: ThunkDispatch<IRootState, null, IAction<SpotifyApi.CurrentUsersProfileResponse>>
 ): IDispatchProps => {
   return {
-    setGlobalSpotifyClient: (token: string) => dispatch(setGlobalSpotifyClient(token)),
     fetchUser: (api: SpotifyWebApi) => dispatch(fetchUser(api)),
   };
 };

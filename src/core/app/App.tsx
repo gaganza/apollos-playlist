@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import { Snackbar } from '@material-ui/core';
 
 import HomePage from 'components/HomePage';
@@ -15,30 +14,41 @@ import { TAppProps } from './interfaces';
 import './styles.scss';
 
 class App extends React.PureComponent<TAppProps> {
-  public async componentDidMount() {
-    let { setGlobalSpotifyClient, fetchUser, history } = this.props;
-    if (Cookies.get('spotify-bearer')) {
-      setGlobalSpotifyClient(Cookies.get('spotify-bearer')!);
-    }
+  public componentDidMount = (): void => {
+    let { history, spotifyWebApi, openSnackbar } = this.props;
+    let { location } = history;
+    let { pathname } = location;
 
-    let { spotifyWebApi } = this.props;
+    let treatedPathname: string = '?' + pathname.substring(1);
+    let params: URLSearchParams = new URLSearchParams(treatedPathname);
 
-    if (spotifyWebApi.getAccessToken() !== undefined) {
-      await fetchUser(spotifyWebApi).then((_: void) => {
-        if (history.location.pathname === '/') {
-          history.push('/playlists');
+    if (!!params.get('expires_in')) {
+      let expiresIn: Date = new Date();
+      expiresIn.setSeconds(expiresIn.getSeconds() + Number(params.get('expires_in')!));
+
+      setInterval(() => {
+        if (new Date() >= expiresIn) {
+          clearInterval();
+          spotifyWebApi.resetAccessToken();
+          openSnackbar({
+            open: true,
+            message: 'Oops! Looks like your session has expired',
+            autoHideDuration: null,
+            anchorOrigin: { horizontal: 'center', vertical: 'top' },
+          });
         }
-      });
+      }, 1000);
     }
-  }
+  };
 
-  public render(): JSX.Element {
+  public render = (): JSX.Element => {
     let { closeSnackbar, snackbar, spotifyWebApi } = this.props;
-    let isLoggedIn: boolean = spotifyWebApi.getAccessToken() !== undefined && spotifyWebApi.getAccessToken() !== '';
+    let isLoggedIn: boolean = !!spotifyWebApi.getAccessToken();
 
     if (!isLoggedIn) {
       return (
         <div className="apollos-playlist-container">
+          <Snackbar {...snackbar} onClose={closeSnackbar} />
           <HomePage />
         </div>
       );
@@ -57,7 +67,7 @@ class App extends React.PureComponent<TAppProps> {
         </ResponsiveDrawer>
       </div>
     );
-  }
+  };
 }
 
 export default App;
