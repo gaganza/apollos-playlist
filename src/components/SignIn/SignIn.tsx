@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Cookies from 'js-cookie';
 
 import { redirectUri, clientId, scopes, authEndpoint, responseType } from 'authorization';
 import { TSignInProps } from './interfaces';
@@ -8,42 +7,37 @@ import './style.scss';
 
 class SignIn extends React.PureComponent<TSignInProps> {
   public async componentDidMount(): Promise<void> {
-    let { history } = this.props;
+    let { history, spotifyWebApi, fetchUser } = this.props;
     let { location } = history;
     let { pathname } = location;
 
-    console.log(process.env.PUBLIC_URL);
-
+    // if the string 'access_token' exists in the URL then that means we were just redirected from the Spotfiy auth
+    // endpoint and now have all of the info we need to safely use the Spotify API client
     if (pathname.indexOf('access_token') !== -1) {
-      let token: string = pathname.substring(pathname.indexOf('=') + 1, pathname.indexOf('&'));
+      // due to the HashRouter all the links will look like /#/ - meaning in this case pathname will be prefixed with
+      // a '/' which we have to strip out & replace with a '?' in order to easily use a URLSearchParam object for
+      // parsing. Sadly, messing with the redirect uri did not help fix this issue.
 
-      let { setGlobalSpotifyClient, history, fetchUser } = this.props;
+      let treatedPathname: string = '?' + pathname.substring(1);
 
-      Cookies.set('spotify-bearer', token, {
-        path: '/auth',
-        sameSite: 'none',
-        secure: true,
-      });
+      spotifyWebApi.setAccessToken(new URLSearchParams(treatedPathname).get('access_token')!);
 
-      setGlobalSpotifyClient(token);
-      await fetchUser(this.props.spotifyWebApi).then((_: void) => {
+      await fetchUser(spotifyWebApi).then((_: void) => {
         history.push('/playlists');
       });
     }
   }
 
   public render(): JSX.Element {
-    let uri: string = `${authEndpoint}`;
-
     let params: URLSearchParams = new URLSearchParams({
-      client_id: clientId,
-      redirect_uri: redirectUri,
+      client_id: encodeURI(clientId),
+      redirect_uri: encodeURI(redirectUri),
       scope: scopes.join('%20'),
-      response_type: responseType,
+      response_type: encodeURI(responseType),
     });
 
     return (
-      <a className="sign-in-button" href={uri + params.toString()}>
+      <a className="sign-in-button" href={authEndpoint + params.toString()}>
         Login to Spotify
       </a>
     );
