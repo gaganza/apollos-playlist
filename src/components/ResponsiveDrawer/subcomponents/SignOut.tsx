@@ -17,7 +17,7 @@ export interface IStateProps {
 export type TSignOutProps = ISignOutProps & IStateProps & RouteComponentProps;
 
 class SignOut extends React.PureComponent<TSignOutProps> {
-  public onClickHandler = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  public onClickHandler = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     let { spotifyWebApi, history } = this.props;
 
     spotifyWebApi.resetAccessToken();
@@ -25,7 +25,7 @@ class SignOut extends React.PureComponent<TSignOutProps> {
     history.push('/');
   };
 
-  public render(): JSX.Element {
+  public render = (): JSX.Element => {
     return (
       <div>
         <ThemeProvider theme={buttonTheme}>
@@ -35,7 +35,7 @@ class SignOut extends React.PureComponent<TSignOutProps> {
         </ThemeProvider>
       </div>
     );
-  }
+  };
 }
 const mapStateToProps = (state: IRootState): IStateProps => {
   return {

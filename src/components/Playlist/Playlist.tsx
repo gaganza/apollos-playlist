@@ -18,7 +18,7 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
     this.state = { loading: true };
   }
 
-  public componentDidMount(): void {
+  public componentDidMount = (): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     let { location, spotifyWebApi, fetchPlaylist, fetchTracksAttributes } = this.props;
 
@@ -34,9 +34,9 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
     }
 
     this.setState({ loading: false });
-  }
+  };
 
-  public renderPlaylistArtwork(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
+  public renderPlaylistArtwork = (playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null => {
     if (!playlist || !playlist.images || playlist.images.length === 0) return null;
 
     return (
@@ -46,15 +46,15 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         alt={`${playlist.name} playlist artwork`}
       />
     );
-  }
+  };
 
-  public renderPlaylistName(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
+  public renderPlaylistName = (playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null => {
     if (!playlist) return null;
 
     return <Typography>{playlist.name}</Typography>;
-  }
+  };
 
-  public renderPlaylistOwner(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
+  public renderPlaylistOwner = (playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null => {
     if (!playlist) return null;
 
     return (
@@ -63,9 +63,9 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         <Typography>{playlist.owner.display_name}</Typography>
       </div>
     );
-  }
+  };
 
-  public renderAttributeBar(normalizedData: IAudioFeatures, attribute: keyof IAudioFeatures): JSX.Element {
+  public renderAttributeBar = (normalizedData: IAudioFeatures, attribute: keyof IAudioFeatures): JSX.Element => {
     return (
       <div>
         <Typography>{capitalizeFirstLetter(attribute)}</Typography>
@@ -74,9 +74,9 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         </ThemeProvider>
       </div>
     );
-  }
+  };
 
-  public renderPlaylistAnalysis(tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse): JSX.Element | null {
+  public renderPlaylistAnalysis = (tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse): JSX.Element | null => {
     if (!tracksAttributes) return null;
 
     let normalizedData: IAudioFeatures = normalizeTrackAudioFeature(tracksAttributes);
@@ -90,9 +90,9 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         <Grid item>{this.renderAttributeBar(normalizedData, 'valence')}</Grid>
       </Grid>
     );
-  }
+  };
 
-  public renderTracks(playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null {
+  public renderTracks = (playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null => {
     if (!playlist) return null;
 
     return (
@@ -123,9 +123,9 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         </TableContainer>
       </ThemeProvider>
     );
-  }
+  };
 
-  public render(): JSX.Element | null {
+  public render = (): JSX.Element | null => {
     let { location, playlist, tracksAttributes } = this.props;
     let { loading } = this.state;
 
@@ -159,7 +159,7 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         </Grid>
       </Grid>
     );
-  }
+  };
 }
 
 export default Playlist;

@@ -25,7 +25,7 @@ const cardTheme = createMuiTheme({
 });
 
 class PlaylistCard extends React.PureComponent<SpotifyApi.PlaylistObjectSimplified> {
-  public render(): JSX.Element {
+  public render = (): JSX.Element => {
     let { name, images, id } = this.props;
 
     return (
@@ -50,7 +50,7 @@ class PlaylistCard extends React.PureComponent<SpotifyApi.PlaylistObjectSimplifi
         </ThemeProvider>
       </Link>
     );
-  }
+  };
 }
 
 export { PlaylistCard };

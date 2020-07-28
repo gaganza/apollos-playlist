@@ -15,7 +15,7 @@ export interface IStateProps {
 export type TProfileProps = IProfileProps & IStateProps & RouteComponentProps;
 
 class Profile extends React.PureComponent<TProfileProps> {
-  public render(): JSX.Element | null {
+  public render = (): JSX.Element | null => {
     let { user } = this.props;
 
     if (!user) return null;
@@ -52,7 +52,7 @@ class Profile extends React.PureComponent<TProfileProps> {
         </div>
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps: MapStateToPropsParam<IStateProps, IProfileProps, IRootState> = (

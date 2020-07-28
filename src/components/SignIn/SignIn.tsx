@@ -6,7 +6,7 @@ import { TSignInProps } from './interfaces';
 import './style.scss';
 
 class SignIn extends React.PureComponent<TSignInProps> {
-  public async componentDidMount(): Promise<void> {
+  public componentDidMount = async (): Promise<void> => {
     let { history, spotifyWebApi, fetchUser } = this.props;
     let { location } = history;
     let { pathname } = location;
@@ -26,9 +26,9 @@ class SignIn extends React.PureComponent<TSignInProps> {
         history.push('/playlists');
       });
     }
-  }
+  };
 
-  public render(): JSX.Element {
+  public render = (): JSX.Element => {
     let params: URLSearchParams = new URLSearchParams({
       client_id: encodeURI(clientId),
       redirect_uri: encodeURI(redirectUri),
@@ -41,7 +41,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
         Login to Spotify
       </a>
     );
-  }
+  };
 }
 
 export default SignIn;

@@ -18,7 +18,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
     };
   }
 
-  public async componentDidMount(): Promise<void> {
+  public componentDidMount = async (): Promise<void> => {
     let { location, spotifyWebApi, fetchPlaylists, user, playlists } = this.props;
 
     // no URL params
@@ -32,9 +32,9 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
     }
 
     this.setState({ loading: false });
-  }
+  };
 
-  public handlePaginationChange = (_: React.ChangeEvent<unknown>, page: number) => {
+  public handlePaginationChange = (_: React.ChangeEvent<unknown>, page: number): void => {
     let { fetchPlaylists, spotifyWebApi, user, playlists } = this.props;
     if (playlists!.items[page] === undefined) {
       fetchPlaylists(spotifyWebApi, user!.id, {
@@ -46,7 +46,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
     this.setState({ page });
   };
 
-  public render(): JSX.Element {
+  public render = (): JSX.Element => {
     let { playlists } = this.props;
     let { page, loading } = this.state;
 
@@ -87,7 +87,7 @@ class Playlists extends React.Component<TPlaylistsProps, IPlaylistsState> {
         )}
       </div>
     );
-  }
+  };
 }
 
 export default Playlists;
