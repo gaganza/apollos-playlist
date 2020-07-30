@@ -105,7 +105,9 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
                   <TableCell style={{ width: '50px' }}>
                     <img
                       style={{ maxHeight: '50px', maxWidth: '50px' }}
-                      src={track.track.album.images[0].url}
+                      src={
+                        track.track.album.images && track.track.album.images[0] ? track.track.album.images[0].url : ''
+                      }
                       alt={'Album artwork for the song'}
                     />
                   </TableCell>
