@@ -20,11 +20,13 @@ export const normalizeTrackAudioFeature = (
   let count: number = tracksAttributes.audio_features.length;
 
   tracksAttributes.audio_features.forEach((feature: SpotifyApi.AudioFeaturesObject) => {
-    normalized.acousticness += feature.acousticness;
-    normalized.danceability += feature.danceability;
-    normalized.energy += feature.energy;
-    normalized.instrumentalness += feature.instrumentalness;
-    normalized.valence += feature.valence;
+    if (feature) {
+      normalized.acousticness += feature.acousticness;
+      normalized.danceability += feature.danceability;
+      normalized.energy += feature.energy;
+      normalized.instrumentalness += feature.instrumentalness;
+      normalized.valence += feature.valence;
+    }
   });
 
   normalized.acousticness = (normalized.acousticness / count) * 100;
