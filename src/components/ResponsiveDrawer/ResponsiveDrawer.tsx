@@ -91,9 +91,9 @@ export default function ResponsiveDrawer(props: any) {
         <Divider />
         <List>
           <Link to={'/playlists'} style={{ textDecoration: 'none' }}>
-            <ListItem button key={'Playlists'}>
+            <ListItem button key={'Your Playlists'}>
               <MusicNote style={{ color: 'white' }} />
-              <ListItemText primary={'Playlists'} style={{ color: 'white' }} />
+              <ListItemText primary={'Your Playlists'} style={{ color: 'white' }} />
             </ListItem>
           </Link>
 
