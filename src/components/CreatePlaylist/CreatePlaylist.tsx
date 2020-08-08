@@ -54,11 +54,13 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   }
 
   public componentDidMount = (): void => {
-    let { fetchTopArtists, spotifyWebApi } = this.props;
+    let { fetchTopArtists, spotifyWebApi, topArtists } = this.props;
 
-    fetchTopArtists(spotifyWebApi, 'short_term');
-    fetchTopArtists(spotifyWebApi, 'medium_term');
-    fetchTopArtists(spotifyWebApi, 'long_term');
+    if (!topArtists) {
+      fetchTopArtists(spotifyWebApi, 'short_term');
+      fetchTopArtists(spotifyWebApi, 'medium_term');
+      fetchTopArtists(spotifyWebApi, 'long_term');
+    }
   };
 
   public valueLabelFormat = (value: number, _: number): string => {

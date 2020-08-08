@@ -33,7 +33,7 @@ export const fetchTopArtists = (
 ): ThunkAction<Promise<void>, IRootState, unknown, IAction<SpotifyApi.UsersTopArtistsResponse>> => {
   return (dispatch: Dispatch<IAction<SpotifyApi.UsersTopArtistsResponse>>): Promise<void> => {
     return api
-      .getMyTopArtists({ time_range: timeRange })
+      .getMyTopArtists({ time_range: timeRange, limit: 50 })
       .then((response: Response<SpotifyApi.UsersTopArtistsResponse>) => {
         if (timeRange === 'long_term') {
           dispatch(receiveTopArtistsLongTerm(response.body));
