@@ -20,6 +20,7 @@ const defaultState: IRootState = {
   tracksAttributes: null,
   topArtists: null,
   snackbar: initialSnackbarState,
+  followedArtists: null,
 };
 
 const configureStore = (preloadedState: IRootState = defaultState): Store<IRootState> => {

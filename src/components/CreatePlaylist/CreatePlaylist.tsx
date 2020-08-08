@@ -54,7 +54,11 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   }
 
   public componentDidMount = (): void => {
-    let { fetchTopArtists, spotifyWebApi, topArtists } = this.props;
+    let { fetchTopArtists, spotifyWebApi, topArtists, fetchFollowedArtists, followedArtists } = this.props;
+
+    if (!followedArtists) {
+      fetchFollowedArtists(spotifyWebApi);
+    }
 
     if (!topArtists) {
       fetchTopArtists(spotifyWebApi, 'short_term');
@@ -217,6 +221,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   };
 
   public render = (): JSX.Element => {
+    let { followedArtists } = this.props;
     let { selectedArtistsIds, playlistName } = this.state;
 
     let attributes: (keyof IAudioFeatures)[] = [
@@ -229,12 +234,19 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
 
     let artists: SpotifyApi.ArtistObjectFull[] = [];
 
+    if (followedArtists && followedArtists?.artists) {
+      artists = followedArtists.artists.items;
+    }
+
     let { topArtists } = this.props;
 
-    if (topArtists && topArtists.longTerm && topArtists.mediumTerm && topArtists.shortTerm) {
+    if (topArtists && topArtists.longTerm && topArtists.mediumTerm && topArtists.shortTerm && followedArtists) {
       let { longTerm, mediumTerm, shortTerm } = topArtists;
 
-      artists = artists.concat(longTerm.items.concat(mediumTerm.items.concat(shortTerm.items)));
+      artists = artists.concat(
+        followedArtists.artists.items,
+        artists.concat(longTerm.items.concat(mediumTerm.items.concat(shortTerm.items)))
+      );
 
       artists = artists.filter((e, i) => artists.findIndex((a) => a.id === e.id) === i);
     }

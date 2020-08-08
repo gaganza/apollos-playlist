@@ -22,6 +22,7 @@ export interface ICreatePlaylistState {
 
 export interface IDispatchProps {
   fetchTopArtists: (api: SpotifyWebApi, timeRange: 'long_term' | 'medium_term' | 'short_term') => Promise<void>;
+  fetchFollowedArtists: (api: SpotifyWebApi) => Promise<void>;
   openSnackBar: (data: Partial<SnackbarProps>) => void;
   clearPlaylist: () => void;
 }
@@ -31,6 +32,7 @@ export interface IStateProps {
   user: SpotifyApi.UserProfileResponse;
   tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse | null;
   topArtists: ITopArtistsReducer | null;
+  followedArtists: SpotifyApi.UsersFollowedArtistsResponse | null;
 }
 
 export type TCreatePlaylistProps = ICreatePlaylistProps & IStateProps & IDispatchProps & RouteComponentProps;

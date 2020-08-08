@@ -5,6 +5,7 @@ import { playlistsReducer } from 'components/Playlists/reducer';
 import { playlistReducer } from 'components/Playlist/reducer';
 import { topArtistsReducer } from 'components/TopArtists/reducer';
 import { snackBarReducer } from 'components/Snackbar/reducer';
+import { followedArtistsReducer } from 'components/FollowedArtists/reducer';
 
 export default combineReducers({
   spotifyWebApi: clientReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   tracksAttributes: tracksAttributesReducer,
   topArtists: topArtistsReducer,
   snackbar: snackBarReducer,
+  followedArtists: followedArtistsReducer,
 });

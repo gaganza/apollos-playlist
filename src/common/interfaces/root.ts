@@ -12,4 +12,5 @@ export interface IRootState {
   tracksAttributes: SpotifyApi.MultipleAudioFeaturesResponse | null;
   topArtists: ITopArtistsReducer | null;
   snackbar: SnackbarProps;
+  followedArtists: SpotifyApi.UsersFollowedArtistsResponse | null;
 }
