@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Table, TableContainer, TableRow, TableCell, TableBody, Typography, LinearProgress } from '@material-ui/core';
+import PhotoSizeSelectActual from '@material-ui/icons/PhotoSizeSelectActual';
 import PersonIcon from '@material-ui/icons/Person';
 import { ThemeProvider } from '@material-ui/core/styles';
 
@@ -92,6 +93,28 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
     );
   };
 
+  public renderAlbumArtwork = (track: SpotifyApi.TrackObjectFull): JSX.Element => {
+    const album = track.album;
+
+    if (album.images.length > 0) {
+      return (
+        <a href={track.uri}>
+          <img
+            style={{ maxHeight: '50px', maxWidth: '50px' }}
+            src={album.images[0].url}
+            alt={'Album artwork for the song'}
+          />
+        </a>
+      );
+    }
+
+    return (
+      <a href={track.uri}>
+        <PhotoSizeSelectActual />
+      </a>
+    );
+  };
+
   public renderTracks = (playlist: SpotifyApi.SinglePlaylistResponse): JSX.Element | null => {
     if (!playlist) return null;
 
@@ -100,28 +123,22 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
         <TableContainer>
           <Table>
             <TableBody>
-              {playlist.tracks.items.map((track: SpotifyApi.PlaylistTrackObject) => (
-                <TableRow hover key={`table-row-${track.track.id}`}>
-                  <TableCell style={{ width: '50px' }}>
-                    <img
-                      style={{ maxHeight: '50px', maxWidth: '50px' }}
-                      src={
-                        track.track.album.images && track.track.album.images[0] && track.track.album.images[0].url
-                          ? track.track.album.images[0].url
-                          : ''
-                      }
-                      alt={'Album artwork for the song'}
-                    />
-                  </TableCell>
-                  <TableCell style={{ display: 'felx', flexDirection: 'column' }}>
-                    <div>{track.track.name}</div>
-                    <div>
-                      {track.track.artists[0].name} - {track.track.album.name}
-                    </div>
-                  </TableCell>
-                  <TableCell>{millisecondsToViewableFormat(track.track.duration_ms)}</TableCell>
-                </TableRow>
-              ))}
+              {playlist.tracks.items.map((trackObject: SpotifyApi.PlaylistTrackObject) => {
+                const { track } = trackObject;
+
+                return (
+                  <TableRow hover key={`table-row-${track.id}`}>
+                    <TableCell style={{ width: '50px' }}>{this.renderAlbumArtwork(track)}</TableCell>
+                    <TableCell style={{ display: 'flex', flexDirection: 'column' }}>
+                      <Typography>{track.name}</Typography>
+                      <Typography>
+                        {track.artists[0].name} - {track.album.name}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>{millisecondsToViewableFormat(track.duration_ms)}</TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
