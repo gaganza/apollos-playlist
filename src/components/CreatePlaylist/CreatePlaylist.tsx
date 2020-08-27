@@ -14,6 +14,7 @@ import {
   FormControl,
   TextField,
 } from '@material-ui/core';
+import PhotoSizeSelectActual from '@material-ui/icons/PhotoSizeSelectActual';
 
 import { capitalizeFirstLetter } from 'common/helpers';
 import { Response, IAudioFeatures } from 'common/interfaces';
@@ -175,12 +176,19 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
   };
 
   public renderChip = (artists: SpotifyApi.ArtistObjectFull[], value: string): JSX.Element => {
+    const selectedArtist = artists.find((a) => a.id === value);
+
+    if (selectedArtist?.images && selectedArtist.images.length > 0) {
+      return (
+        <ThemeProvider theme={chipTheme} key={value}>
+          <Chip label={selectedArtist.name} avatar={<Avatar src={selectedArtist.images[0].url} />} />
+        </ThemeProvider>
+      );
+    }
+
     return (
       <ThemeProvider theme={chipTheme} key={value}>
-        <Chip
-          label={artists.find((a) => a.id === value)?.name}
-          avatar={<Avatar src={artists.find((a) => a.id === value)?.images[0].url} />}
-        />
+        <Chip label={selectedArtist?.name} avatar={<PhotoSizeSelectActual />} />
       </ThemeProvider>
     );
   };
