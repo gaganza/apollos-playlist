@@ -2,7 +2,7 @@
 
 ## Apollo's Playlist
 
-Playlist creation using the Spotify API - user defined inputs combined with your listening habbits help define playlists that best fit your taste.
+Playlist creation using the Spotify API - user defined inputs combined with your listening habits help define playlists that best fit your taste.
 
 ## Authorization Flow
 

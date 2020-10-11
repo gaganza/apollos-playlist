@@ -165,10 +165,10 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
           </Grid>
         )}
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} lg={4} xl={3}>
           {this.renderPlaylistArtwork(playlist)}
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} lg={8} xl={9}>
           {this.renderPlaylistName(playlist)}
           <br />
           {this.renderPlaylistOwner(playlist)}
