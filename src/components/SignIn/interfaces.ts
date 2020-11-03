@@ -1,13 +1,4 @@
 import { RouteComponentProps } from 'react-router-dom';
-import SpotifyWebApi from 'spotify-web-api-node';
+import { TSignInConnectedProps } from './index'
 
-export interface ISignInProps {}
-export interface IDispatchProps {
-  fetchUser: (api: SpotifyWebApi) => Promise<void>;
-}
-
-export interface IStateProps {
-  spotifyWebApi: SpotifyWebApi;
-}
-
-export type TSignInProps = ISignInProps & IStateProps & IDispatchProps & RouteComponentProps;
+export type TSignInProps = TSignInConnectedProps & RouteComponentProps;

@@ -1,25 +1,23 @@
-import { connect } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
+import { connect, ConnectedProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import SpotifyWebApi from 'spotify-web-api-node';
 
 import SignIn from './SignIn';
 import { fetchUser } from 'common/actions';
-import { IAction, IRootState } from 'common/interfaces';
-import { IStateProps, IDispatchProps } from './interfaces';
+import {  IRootState } from 'common/interfaces';
 
-const mapStateToProps = (state: IRootState): IStateProps => {
+const mapStateToProps = (state: IRootState) => {
   return {
     spotifyWebApi: state.spotifyWebApi,
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<SpotifyApi.CurrentUsersProfileResponse>>
-): IDispatchProps => {
-  return {
-    fetchUser: (api: SpotifyWebApi) => dispatch(fetchUser(api)),
-  };
-};
+const mapDispatchToProps = {
+  fetchUser
+}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export type TSignInConnectedProps = ConnectedProps<typeof connector>;
+
+export default connector(withRouter(SignIn));
+

@@ -1,23 +1,16 @@
-import { connect } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
+import { connect, ConnectedProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import SpotifyWebApi from 'spotify-web-api-node';
 
 import Playlists from './Playlists';
 import { fetchPlaylists } from './actions';
-import { IPaginationOptions, IAction, IPagingObject, IRootState } from 'common/interfaces';
-import { IStateProps, IDispatchProps } from './interfaces';
+import {IRootState } from 'common/interfaces';
 
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<IRootState, null, IAction<IPagingObject<SpotifyApi.PlaylistObjectSimplified>>>
-): IDispatchProps => {
-  return {
-    fetchPlaylists: (api: SpotifyWebApi, userId: string, options: IPaginationOptions) =>
-      dispatch(fetchPlaylists(api, userId, options)),
-  };
-};
 
-const mapStateToProps = (state: IRootState): IStateProps => {
+const mapDispatchToProps = {
+  fetchPlaylists
+}
+
+const mapStateToProps = (state: IRootState) => {
   return {
     spotifyWebApi: state.spotifyWebApi,
     user: state.user,
@@ -25,4 +18,8 @@ const mapStateToProps = (state: IRootState): IStateProps => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Playlists));
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export type TPlaylistConnectedProps = ConnectedProps<typeof connector>;
+
+export default connector(withRouter(Playlists));

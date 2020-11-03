@@ -128,7 +128,7 @@ class CreatePlaylist extends React.Component<TCreatePlaylistProps, ICreatePlayli
               });
             });
         } else {
-          this.props.openSnackBar({
+          this.props.openSnackbar({
             open: true,
             message: 'Oops! Looks like you need to broaden your selection',
           });
