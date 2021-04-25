@@ -8,8 +8,7 @@ import Playlist from 'components/Playlist';
 import Playlists from 'components/Playlists';
 import CreatePlaylist from 'components/CreatePlaylist';
 import ResponsiveDrawer from 'components/ResponsiveDrawer/ResponsiveDrawer';
-
-import { TAppProps } from './interfaces';
+import { TAppProps } from './index';
 
 import './styles.scss';
 
