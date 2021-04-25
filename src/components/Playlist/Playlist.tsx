@@ -41,11 +41,13 @@ class Playlist extends React.Component<TPlaylistProps, IPlaylistState> {
     if (!playlist || !playlist.images || playlist.images.length === 0) return null;
 
     return (
-      <img
-        src={playlist.images[0].url}
-        style={{ maxWidth: '300px', maxHeight: '300px ' }}
-        alt={`${playlist.name} playlist artwork`}
-      />
+      <a href={playlist.uri}>
+        <img
+          src={playlist.images[0].url}
+          style={{ maxWidth: '300px', maxHeight: '300px ' }}
+          alt={`${playlist.name} playlist artwork`}
+        />
+      </a>
     );
   };
 
