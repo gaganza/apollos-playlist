@@ -22,6 +22,6 @@ I follow Spotify's suggested "Implicit grant flow" which allows me to safely exp
 
 ![Detailed playlist view screenshot](./docs/detailed_playlist.png?raw=true)
 
-## Crreate Playlist
+## Create Playlist
 
 ![Detailed playlist view screenshot](./docs/create_playlist.png?raw=true)
