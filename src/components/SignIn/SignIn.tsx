@@ -32,7 +32,7 @@ class SignIn extends React.PureComponent<TSignInProps> {
     let params: URLSearchParams = new URLSearchParams({
       client_id: encodeURI(clientId),
       redirect_uri: encodeURI(redirectUri),
-      scope: scopes.join('%20'),
+      scope: scopes.join(' '),
       response_type: encodeURI(responseType),
     });
 

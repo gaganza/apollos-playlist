@@ -1,6 +1,6 @@
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { createTheme } from '@material-ui/core/styles';
 
-export const tableTheme = createMuiTheme({
+export const tableTheme = createTheme({
   overrides: {
     MuiTableCell: {
       root: {
